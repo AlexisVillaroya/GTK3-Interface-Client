@@ -1,17 +1,8 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-#include <pthread.h>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <arpa/inet.h>
-#include <stdbool.h>
-
-#include "clientcxnmanager.h"
-
-GtkBuilder *builder = NULL;
+#include "client_interface.h"
 
 int timer_id = 0;
 int elapsed_time = 0;
@@ -28,7 +19,7 @@ void on_window_main_destroy() {
 /**
  * Fonction invoque lors du click sur le bouton 'Yes'
  */
-void on_button_click() {
+void on_button_click(GtkWidget *builder) {
     printf("bouton 'Yes' clicked\n");
     GtkEntry *texte = GTK_ENTRY(gtk_builder_get_object(builder, "texte"));
     gchar *data = (gchar *) gtk_entry_get_text(texte);
@@ -36,7 +27,7 @@ void on_button_click() {
     gtk_entry_set_text(echo, data);
 }
 
-int timer_handler() {
+int timer_handler(GtkWidget *builder) {
     elapsed_time++;
     char txt[100];
     printf("timer running, time : %d\n", elapsed_time);
@@ -83,43 +74,3 @@ void on_cancel() {
         gtk_widget_destroy(message_dialog);
     }
 }
-
-/*
- * 
- */
-int main(int argc, char** argv) {
-
-    GtkWidget *win;
-
-    gtk_init(&argc, &argv);
-    builder = gtk_builder_new_from_file("glade/Interface.glade");
-    win = GTK_WIDGET(gtk_builder_get_object(builder, "app_win"));
-    gtk_builder_connect_signals(builder, NULL);
-    gtk_widget_show(win);
-    gtk_main();
-
-    int sockfd;
-    int status = 0;
-    char msg[100];
-    pthread_t thread;
-
-    sockfd = open_connection();
-
-    strcpy(msg, "Hello from Xeon"); //Xeon is the name of the this client
-    printf("sending : %s\n", msg);
-    write(sockfd, msg, strlen(msg));
-
-    //Creation d'un pthread de lecture
-    pthread_create(&thread, 0, threadProcess, &sockfd);
-    //write(connection->sock,"Main APP Still running",15);
-    pthread_detach(thread);
-    do {
-        fgets(msg, 100, stdin);
-        //printf("sending : %s\n", msg);
-        status = write(sockfd, msg, strlen(msg));
-        //memset(msg,'\0',100);
-    } while (status != -1);
-
-    return (EXIT_SUCCESS);
-}
-

@@ -8,7 +8,7 @@
 #include <arpa/inet.h>
 #include <stdbool.h>
 
-#include "clientcxnmanager.h"
+#include "client_connection.h"
 
 void *threadProcess(void * ptr) {
     char buffer_in[BUFFERSIZE];

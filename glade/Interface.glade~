@@ -2,84 +2,53 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkApplicationWindow" id="app_win">
+  <object class="GtkWindow" id="window">
     <property name="can-focus">False</property>
-    <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
+    <property name="resizable">False</property>
+    <property name="window-position">center</property>
+    <property name="gravity">center</property>
     <child>
-      <object class="GtkBox">
+      <object class="GtkFixed" id="fixed">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkButton" id="betrayButton">
+            <property name="label" translatable="yes">Trahir</property>
+            <property name="width-request">170</property>
+            <property name="height-request">80</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="ypad">10</property>
-            <property name="label" translatable="yes">Dilemme du prisonnier</property>
-            <attributes>
-              <attribute name="font-desc" value="Sans Bold 22"/>
-              <attribute name="weight" value="bold"/>
-            </attributes>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="y">214</property>
           </packing>
         </child>
         <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <object class="GtkBox">
+          <object class="GtkButton" id="collaborateButton">
+            <property name="label" translatable="yes">Collaborer</property>
+            <property name="width-request">170</property>
+            <property name="height-request">80</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="homogeneous">True</property>
-            <child>
-              <object class="GtkButton">
-                <property name="label">Trahir</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <signal name="clicked" handler="on_button_click" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton">
-                <property name="label">Collaborer</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <signal name="clicked" handler="on_cancel" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">6</property>
+            <property name="x">343</property>
+            <property name="y">214</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label">
+            <property name="width-request">318</property>
+            <property name="height-request">63</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Dilemme du prisonnier</property>
+          </object>
+          <packing>
+            <property name="x">96</property>
+            <property name="y">68</property>
           </packing>
         </child>
       </object>
