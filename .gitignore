@@ -1,3 +1,4 @@
 /output/
-src/*.o
+/dist/
+/build/
 *.o
