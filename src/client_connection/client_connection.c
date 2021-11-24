@@ -31,25 +31,42 @@ int open_connection() {
 
     struct sockaddr_in serverAddr;
     int port = 7799;
-
-    // Create the socket. 
+ 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    //Configure settings of the server address
-    // Address family is Internet 
-    serverAddr.sin_family = AF_INET;
-    //Set port number, using htons function 
+    serverAddr.sin_family = AF_INET; 
     serverAddr.sin_port = htons(port);
-    //Set IP address to localhost
     serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
 
-    //Connect the socket to the server using the address
     if (connect(sockfd, (struct sockaddr *) &serverAddr, sizeof (serverAddr)) != 0) {
         printf("Fail to connect to server\n");
         exit(-1);
     };
 
     return sockfd;
+}
+
+void init_connection(){
+    int sockfd;
+    int status = 0;
+    char msg[100];
+    pthread_t thread;
+
+    sockfd = open_connection();
+
+    strcpy(msg, "Hello from Xeon"); 
+    printf("sending : %s\n", msg);
+    write(sockfd, msg, strlen(msg));
+
+    pthread_create(&thread, 0, threadProcess, &sockfd);
+    pthread_detach(thread);
+
+    do {
+        fgets(msg, 100, stdin);
+        //printf("sending : %s\n", msg);
+        status = write(sockfd, msg, strlen(msg));
+        //memset(msg,'\0',100);
+    } while (status != -1);
 }

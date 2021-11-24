@@ -14,28 +14,30 @@
         <child>
           <object class="GtkButton" id="betrayButton">
             <property name="label" translatable="yes">Trahir</property>
-            <property name="width-request">170</property>
-            <property name="height-request">80</property>
+            <property name="width-request">257</property>
+            <property name="height-request">172</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
+            <signal name="clicked" handler="on_betrayButton_clicked" swapped="no"/>
           </object>
           <packing>
-            <property name="y">214</property>
+            <property name="y">350</property>
           </packing>
         </child>
         <child>
           <object class="GtkButton" id="collaborateButton">
             <property name="label" translatable="yes">Collaborer</property>
-            <property name="width-request">170</property>
-            <property name="height-request">80</property>
+            <property name="width-request">257</property>
+            <property name="height-request">171</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
+            <signal name="clicked" handler="on_collaborateButton_clicked" swapped="no"/>
           </object>
           <packing>
-            <property name="x">343</property>
-            <property name="y">214</property>
+            <property name="x">256</property>
+            <property name="y">351</property>
           </packing>
         </child>
         <child>
