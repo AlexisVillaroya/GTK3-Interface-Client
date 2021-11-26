@@ -14,7 +14,7 @@
         <child>
           <object class="GtkButton" id="betrayButton">
             <property name="label" translatable="yes">Trahir</property>
-            <property name="width-request">257</property>
+            <property name="width-request">267</property>
             <property name="height-request">172</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
@@ -28,7 +28,7 @@
         <child>
           <object class="GtkButton" id="collaborateButton">
             <property name="label" translatable="yes">Collaborer</property>
-            <property name="width-request">257</property>
+            <property name="width-request">269</property>
             <property name="height-request">171</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
@@ -36,7 +36,7 @@
             <signal name="clicked" handler="on_collaborateButton_clicked" swapped="no"/>
           </object>
           <packing>
-            <property name="x">256</property>
+            <property name="x">268</property>
             <property name="y">351</property>
           </packing>
         </child>
@@ -47,10 +47,86 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="label" translatable="yes">Dilemme du prisonnier</property>
+            <attributes>
+              <attribute name="font-desc" value="Source Code Pro 10"/>
+              <attribute name="style" value="normal"/>
+            </attributes>
           </object>
           <packing>
-            <property name="x">96</property>
-            <property name="y">68</property>
+            <property name="x">106</property>
+            <property name="y">16</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="labelRound">
+            <property name="width-request">148</property>
+            <property name="height-request">63</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="x">196</property>
+            <property name="y">270</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonFree">
+            <property name="label" translatable="yes">Libre</property>
+            <property name="width-request">109</property>
+            <property name="height-request">58</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="x">22</property>
+            <property name="y">137</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonFiveYears">
+            <property name="label" translatable="yes">5 ans</property>
+            <property name="width-request">109</property>
+            <property name="height-request">58</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="x">281</property>
+            <property name="y">138</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonSixMonth">
+            <property name="label" translatable="yes">6 mois</property>
+            <property name="width-request">109</property>
+            <property name="height-request">58</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="x">151</property>
+            <property name="y">137</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="buttonTenYears">
+            <property name="label" translatable="yes">10 ans</property>
+            <property name="width-request">109</property>
+            <property name="height-request">58</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can-focus">False</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="x">413</property>
+            <property name="y">138</property>
           </packing>
         </child>
       </object>

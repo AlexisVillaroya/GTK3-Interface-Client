@@ -1,13 +1,16 @@
-#include <gtk/gtk.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "client_interface.h"   
+#include "client_interface.h" 
 
 GtkBuilder *builder;
 GtkWidget *window;
-GtkWidget *betrayButton;
+GtkButton *betrayButton;
 GtkWidget *collaborateButton;
+GtkWidget *buttonFree;
+GtkWidget *buttonSixMonth;
+GtkWidget *buttonFiveYears;
+GtkWidget *buttonTenYears;
 
 /**
  * @brief Destroy the main window
@@ -17,6 +20,36 @@ GtkWidget *collaborateButton;
 void on_window_main_destroy() {
     printf("quitting\n ");
     gtk_main_quit();
+}
+
+/**
+ * @brief set a widget with css 
+ * 
+ * @param cssProvider 
+ * @param g_widget 
+ */
+
+void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget){
+    GtkStyleContext *context = gtk_widget_get_style_context(g_widget);
+
+    gtk_style_context_add_provider(context, 
+    GTK_STYLE_PROVIDER(cssProvider),
+    GTK_STYLE_PROVIDER_PRIORITY_USER);
+}
+
+/**
+ * @brief add style to the interface
+ * 
+ */
+
+void add_styles(){
+    GtkCssProvider *cssProvider1;
+    cssProvider1 = gtk_css_provider_new();
+
+    //load the provider
+    gtk_css_provider_load_from_path(cssProvider1, "include/styles/gtk.css", NULL);
+    css_set(cssProvider1, window);
+    css_set(cssProvider1, betrayButton);
 }
 
 /**
@@ -37,6 +70,7 @@ void on_betrayButton_clicked(GtkButton *button){
 
 void on_collaborateButton_clicked(GtkButton *button){
     printf("collaboration !\n");
+    //gtk_widget_set_sensitive(buttonFree, true);
 }
 
 /**
@@ -60,5 +94,6 @@ void init_window(int argc, char **argv){
 
     betrayButton = GTK_WIDGET(gtk_builder_get_object(builder, "betrayButton"));
     collaborateButton = GTK_WIDGET(gtk_builder_get_object(builder, "collaborateButton"));
+    buttonFree = GTK_WIDGET(gtk_builder_get_object(builder, "buttonFree"));
     gtk_widget_show(window);
 }
