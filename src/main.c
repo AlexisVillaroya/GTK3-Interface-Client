@@ -7,7 +7,7 @@
 int main(int argc, char** argv) {
     init_window(argc, argv);
     add_styles();
-    //init_connection();
+    //net_client_set_func_score_screen()
     gtk_main();  
 }
 

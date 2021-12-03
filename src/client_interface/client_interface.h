@@ -1,5 +1,5 @@
 #include <gtk/gtk.h>
-
+#include "../client_connection/net_prisoner_client.h"
 
 void on_window_main_destroy();
 void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget);

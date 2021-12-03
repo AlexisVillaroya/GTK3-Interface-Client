@@ -60,6 +60,7 @@ void add_styles(){
 
 void on_betrayButton_clicked(GtkButton *button){
     printf("trahison !\n");
+    net_client_betray();
 }
 
 /**
@@ -70,8 +71,9 @@ void on_betrayButton_clicked(GtkButton *button){
 
 void on_collaborateButton_clicked(GtkButton *button){
     printf("collaboration !\n");
-    //gtk_widget_set_sensitive(buttonFree, true);
+    net_client_collab();
 }
+
 
 /**
  * @brief Initialisation of the main window
@@ -83,8 +85,8 @@ void on_collaborateButton_clicked(GtkButton *button){
 void init_window(int argc, char **argv){
     gtk_init(&argc, &argv);
 
+    //net_client_set_func_choice_screen();
     //establish contact with xml code to adjust widget settings
-
     //builder is the pointer to the digest xml file
     builder = gtk_builder_new_from_file("glade/Interface.glade");
     //GTK_WIDGET is a cast here because windows is a widget
