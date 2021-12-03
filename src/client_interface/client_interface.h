@@ -1,5 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <gtk/gtk.h>
 #include "../client_connection/net_prisoner_client.h"
+
+
 
 void init_net_functions();
 void on_window_main_destroy();

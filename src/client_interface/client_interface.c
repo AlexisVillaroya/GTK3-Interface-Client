@@ -1,8 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
+/**
+ * @file client_interface.c
+ * @author Alexis Villaroya & Wolodia Zdetovetzky
+ * @brief 
+ * @version 0.1
+ * @date 2021-12-03
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 
 #include "client_interface.h" 
 
+// init all widgets used
 GtkBuilder *builder;
 GtkWidget *window;
 GtkButton *betrayButton;
@@ -15,24 +24,69 @@ GtkWidget *waitingScreen;
 GtkWidget *waitingSpinner;
 GtkWidget *waitingLabel;
 
+//--------------------------------------
+//               Events
+//--------------------------------------
+
 /**
  * @brief Destroy the main window
- * 
  */
-
 void on_window_main_destroy() {
     printf("quitting\n ");
-    net_client_disconnect();
+    net_client_disconnect(10);
     gtk_main_quit();
 }
 
+
+/**
+ * @brief When the betray button is clicked ...
+ * @param button 
+ */
+
+void on_betrayButton_clicked(GtkButton *button){
+    printf("trahison !\n");
+    net_client_betray(10);
+}
+
+/**
+ * @brief When the collaborate button is clicked ...
+ * @param button 
+ */
+
+void on_collaborateButton_clicked(GtkButton *button){
+    printf("collaboration !\n");
+    net_client_collab(10);
+}
+
+//--------------------------------------
+//              DISPLAY
+//--------------------------------------
+
+/**
+ * @brief 
+ * @param window 
+ */
+void display_main_window(GtkWidget *window){
+    gtk_widget_show_all(window);
+}
+
+/**
+ * @brief 
+ * @param waitingScreen 
+ */
+void display_waiting_screen(GtkWidget *waitingScreen){
+    gtk_widget_show_all(waitingScreen);
+}
+
+//--------------------------------------
+//                 CSS
+//--------------------------------------
+
 /**
  * @brief set a widget with css 
- * 
  * @param cssProvider 
  * @param g_widget 
  */
-
 void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget){
     GtkStyleContext *context = gtk_widget_get_style_context(g_widget);
 
@@ -43,9 +97,7 @@ void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget){
 
 /**
  * @brief add style to the interface
- * 
  */
-
 void add_styles(){
     GtkCssProvider *cssProvider1;
     cssProvider1 = gtk_css_provider_new();
@@ -56,67 +108,28 @@ void add_styles(){
     css_set(cssProvider1, betrayButton);
 }
 
-/**
- * @brief When the betray button is clicked ...
- * 
- * @param button 
- */
-
-void on_betrayButton_clicked(GtkButton *button){
-    printf("trahison !\n");
-    net_client_betray();
-}
-
+//--------------------------------------
+//                 INIT
+//--------------------------------------
 
 /**
- * @brief When the collaborate button is clicked ...
- * 
- * @param button 
+ * @brief delay between server and client responses
  */
-
-void on_collaborateButton_clicked(GtkButton *button){
-    printf("collaboration !\n");
-    net_client_collab();
-}
+ulong delay;
 
 /**
- * @brief 
- * 
- * @param window 
+ * @brief init functions used by the lib
  */
-
-void display_main_window(GtkWidget *window){
-    gtk_widget_show_all(window);
-}
-
-/**
- * @brief 
- * 
- * @param waitingScreen 
- */
-
-void display_waiting_screen(GtkWidget *waitingScreen){
-    gtk_widget_show_all(waitingScreen);
-}
-
-/**
- * @brief 
- * 
- */
-
 void init_net_functions() {
     net_client_set_func_waiting_screen(display_waiting_screen);
     net_client_set_func_choice_screen(display_main_window);
 }
 
-
 /**
  * @brief Initialisation of the main windows
- * 
  * @param argc 
  * @param argv 
  */
-
 void init_windows(int argc, char **argv){
     gtk_init(&argc, &argv);
 
@@ -140,4 +153,3 @@ void init_windows(int argc, char **argv){
 
    display_waiting_screen(waitingScreen);
 }
-
