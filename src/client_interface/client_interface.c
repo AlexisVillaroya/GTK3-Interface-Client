@@ -11,6 +11,9 @@ GtkWidget *buttonFree;
 GtkWidget *buttonSixMonth;
 GtkWidget *buttonFiveYears;
 GtkWidget *buttonTenYears;
+GtkWidget *waitingScreen;
+GtkWidget *waitingSpinner;
+GtkWidget *waitingLabel;
 
 /**
  * @brief Destroy the main window
@@ -19,6 +22,7 @@ GtkWidget *buttonTenYears;
 
 void on_window_main_destroy() {
     printf("quitting\n ");
+    net_client_disconnect();
     gtk_main_quit();
 }
 
@@ -63,6 +67,7 @@ void on_betrayButton_clicked(GtkButton *button){
     net_client_betray();
 }
 
+
 /**
  * @brief When the collaborate button is clicked ...
  * 
@@ -74,15 +79,45 @@ void on_collaborateButton_clicked(GtkButton *button){
     net_client_collab();
 }
 
+/**
+ * @brief 
+ * 
+ * @param window 
+ */
+
+void display_main_window(GtkWidget *window){
+    gtk_widget_show_all(window);
+}
 
 /**
- * @brief Initialisation of the main window
+ * @brief 
+ * 
+ * @param waitingScreen 
+ */
+
+void display_waiting_screen(GtkWidget *waitingScreen){
+    gtk_widget_show_all(waitingScreen);
+}
+
+/**
+ * @brief 
+ * 
+ */
+
+void init_net_functions() {
+    net_client_set_func_waiting_screen(display_waiting_screen);
+    net_client_set_func_choice_screen(display_main_window);
+}
+
+
+/**
+ * @brief Initialisation of the main windows
  * 
  * @param argc 
  * @param argv 
  */
 
-void init_window(int argc, char **argv){
+void init_windows(int argc, char **argv){
     gtk_init(&argc, &argv);
 
     //net_client_set_func_choice_screen();
@@ -94,8 +129,15 @@ void init_window(int argc, char **argv){
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_builder_connect_signals(builder, NULL);
 
+
     betrayButton = GTK_WIDGET(gtk_builder_get_object(builder, "betrayButton"));
     collaborateButton = GTK_WIDGET(gtk_builder_get_object(builder, "collaborateButton"));
     buttonFree = GTK_WIDGET(gtk_builder_get_object(builder, "buttonFree"));
-    gtk_widget_show(window);
+
+    waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
+    waitingSpinner = GTK_WIDGET(gtk_builder_get_object(builder, "waitingSpinner"));
+    waitingLabel = GTK_WIDGET(gtk_builder_get_object(builder, "waitingLabel"));
+
+   display_waiting_screen(waitingScreen);
 }
+

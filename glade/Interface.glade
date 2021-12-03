@@ -2,13 +2,51 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkWindow" id="waitingScreen">
+    <property name="width-request">420</property>
+    <property name="height-request">500</property>
+    <property name="can-focus">False</property>
+    <property name="resizable">False</property>
+    <child>
+      <object class="GtkFixed" id="waitingFixed">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkSpinner" id="spinner">
+            <property name="width-request">180</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="active">True</property>
+          </object>
+          <packing>
+            <property name="x">372</property>
+            <property name="y">196</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="waitingLabel">
+            <property name="width-request">219</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">En attente des autres joueurs...</property>
+          </object>
+          <packing>
+            <property name="x">148</property>
+            <property name="y">199</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="window">
     <property name="can-focus">False</property>
     <property name="resizable">False</property>
-    <property name="window-position">center</property>
-    <property name="gravity">center</property>
     <child>
       <object class="GtkFixed" id="fixed">
+        <property name="width-request">420</property>
+        <property name="height-request">500</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <child>

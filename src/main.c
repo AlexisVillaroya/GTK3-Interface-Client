@@ -5,9 +5,8 @@
 #include "client_interface/client_interface.h"
 
 int main(int argc, char** argv) {
-    init_window(argc, argv);
+    init_net_functions();
+    init_windows(argc, argv);
     add_styles();
-    //net_client_set_func_score_screen()
     gtk_main();  
 }
-
