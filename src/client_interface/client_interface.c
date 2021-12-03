@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "client_interface.h" 
+#include "../client_connection/net_prisoner_client.h"
 
 GtkBuilder *builder;
 GtkWidget *window;
@@ -22,7 +23,7 @@ GtkWidget *waitingLabel;
 
 void on_window_main_destroy() {
     printf("quitting\n ");
-    net_client_disconnect();
+    //net_client_disconnect();
     gtk_main_quit();
 }
 
@@ -64,7 +65,7 @@ void add_styles(){
 
 void on_betrayButton_clicked(GtkButton *button){
     printf("trahison !\n");
-    net_client_betray();
+    //net_client_betray();
 }
 
 
@@ -76,7 +77,7 @@ void on_betrayButton_clicked(GtkButton *button){
 
 void on_collaborateButton_clicked(GtkButton *button){
     printf("collaboration !\n");
-    net_client_collab();
+    //net_client_collab();
 }
 
 /**
@@ -127,6 +128,9 @@ void init_windows(int argc, char **argv){
     //GTK_WIDGET is a cast here because windows is a widget
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    
+    waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
+    g_signal_connect(waitingScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_builder_connect_signals(builder, NULL);
 
 
@@ -134,10 +138,11 @@ void init_windows(int argc, char **argv){
     collaborateButton = GTK_WIDGET(gtk_builder_get_object(builder, "collaborateButton"));
     buttonFree = GTK_WIDGET(gtk_builder_get_object(builder, "buttonFree"));
 
-    waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
     waitingSpinner = GTK_WIDGET(gtk_builder_get_object(builder, "waitingSpinner"));
     waitingLabel = GTK_WIDGET(gtk_builder_get_object(builder, "waitingLabel"));
 
-   display_waiting_screen(waitingScreen);
+    display_waiting_screen(waitingScreen);
+    display_main_window(window);
 }
+
 
