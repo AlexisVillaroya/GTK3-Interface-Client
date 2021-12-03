@@ -101,6 +101,14 @@ enum _net_common_msg_type {
      * int score contain the score 
      */
     SCREEN_SCORE = 6,
+
+    /**
+     * @brief the client sent his id just after
+     * initialising the connection with the server
+     */
+    INIT_CLIENT_ID = 7,
+
+
 };
 
 /**
@@ -126,6 +134,13 @@ typedef struct {
      * @brief true if the player win
      */
     bool has_win;
+
+    /**
+     * @brief unique client id defined
+     * int the client config file
+     */
+    int client_id;
+
 } _net_common_netpacket;
 
 #endif /* NET_PRISONER_COMMON_H */

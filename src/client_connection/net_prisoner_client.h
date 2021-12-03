@@ -61,22 +61,22 @@ void * net_client_set_func_score_screen(void (*f)());
  * @param addrServer server address IP
  * @param port server port
  */
-void net_client_init(char *addrServer, int port);
+void net_client_init(char *addrServer, int port, int client_id);
 
 /**
  * @brief The client want to betray the other player
  */
-void net_client_betray();
+void net_client_betray(ulong delay);
 
 /**
  * @brief The client want to collaborate the other player
  */
-void net_client_collab();
+void net_client_collab(ulong delay);
 
 /**
  * @brief The client want to quit the game
  */
-void net_client_disconnect();
+void net_client_disconnect(ulong delay);
 
 // ----------------------------------------------
 //               Private methods

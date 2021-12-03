@@ -23,6 +23,11 @@
 int net_client_sockfd;
 
 /**
+ * @brief the unique client id
+ */
+int net_client_id;
+
+/**
  * @brief the function used by the library
  * refering to the defined one by the client
  * to display the waiting screen
@@ -117,7 +122,7 @@ void *_net_client_threadProcess(void *ptr)
     int len;
     while ((len = read(net_client_sockfd, &packet, sizeof(packet))) != 0)
     {   
-        _net_common_dbg("client socket %d receive %d bits\n", net_client_sockfd, sizeof(packet));
+        _net_common_dbg("client %d receive %d bits\n", net_client_id, sizeof(packet));
         _net_client_event(packet);
         //memset(&packet, '\0', len);
     }
@@ -130,7 +135,7 @@ void *_net_client_threadProcess(void *ptr)
  * @param addrServer server address IP
  * @param port server port
  */
-void net_client_init(char *addrServer, int port)
+void net_client_init(char *addrServer, int port, int client_id)
 {
     struct sockaddr_in serverAddr;
     pthread_t thread;
@@ -157,6 +162,13 @@ void net_client_init(char *addrServer, int port)
         exit(-1);
     };
 
+    // init the client id
+    _net_common_netpacket packet;
+    packet.msg_type = INIT_CLIENT_ID;
+    packet.client_id = client_id;
+    write(net_client_sockfd, &packet, sizeof(packet));
+    _net_common_dbg("the client sent his id : %d\n", net_client_id);
+
     // reading pthread creation
     pthread_create(&thread, 0, _net_client_threadProcess, &net_client_sockfd);
     pthread_detach(thread);
@@ -165,33 +177,39 @@ void net_client_init(char *addrServer, int port)
 /**
  * @brief The client want to betray the other player
  */
-void net_client_betray()
+void net_client_betray(ulong delay)
 {
     _net_common_netpacket packet;
     packet.msg_type = ACTION_BETRAY;
+    packet.client_id = net_client_id;
+    packet.delay = delay;
     write(net_client_sockfd, &packet, sizeof(packet));
-    _net_common_dbg("%d want to betray\n", net_client_sockfd);
+    _net_common_dbg("%d want to betray\n", net_client_id);
 }
 
 /**
  * @brief The client want to collaborate the other player
  */
-void net_client_collab()
+void net_client_collab(ulong delay)
 {
     _net_common_netpacket packet;
     packet.msg_type = ACTION_COLLAB;
+    packet.client_id = net_client_id;
+    packet.delay = delay;
     write(net_client_sockfd, &packet, sizeof(packet));
-    _net_common_dbg("%d want to collab\n", net_client_sockfd);
+    _net_common_dbg("%d want to collab\n", net_client_id);
 }
 
 /**
  * @brief The client want to quit the game
  */
-void net_client_disconnect()
+void net_client_disconnect(ulong delay)
 {
     _net_common_netpacket packet;
     packet.msg_type = ACTION_QUIT;
+    packet.client_id = net_client_id;
+    packet.delay = delay;
     write(net_client_sockfd, &packet, sizeof(packet));
-    _net_common_dbg("%d want to quit\n", net_client_sockfd);
+    _net_common_dbg("%d want to quit\n", net_client_id);
 }
 #pragma endregion Client

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "string.h": "c",
-        "client_interface.h": "c"
+        "client_interface.h": "c",
+        "net_prisoner_common.h": "c"
     }
 }
