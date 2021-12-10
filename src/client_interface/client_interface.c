@@ -10,6 +10,7 @@
  */
 
 #include "client_interface.h" 
+#include "../client_connection/net_prisoner_client.h"
 
 // init all widgets used
 GtkBuilder *builder;
@@ -44,7 +45,11 @@ GtkWidget *settingsScreen_gtkLabel_errors;
  */
 void on_window_main_destroy() {
     printf("quitting\n ");
+<<<<<<< HEAD
+    //net_client_disconnect();
+=======
     net_client_disconnect(10);
+>>>>>>> main
     gtk_main_quit();
 }
 
@@ -54,7 +59,11 @@ void on_window_main_destroy() {
  */
 void on_betrayButton_clicked(GtkButton *button){
     printf("trahison !\n");
+<<<<<<< HEAD
+    //net_client_betray();
+=======
     net_client_betray(10);
+>>>>>>> main
 }
 
 /**
@@ -63,6 +72,9 @@ void on_betrayButton_clicked(GtkButton *button){
  */
 void on_collaborateButton_clicked(GtkButton *button){
     printf("collaboration !\n");
+<<<<<<< HEAD
+    //net_client_collab();
+=======
     net_client_collab(10);
 }
 #pragma endregion choice_screen
@@ -81,6 +93,7 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
         gtk_label_set_label(settingsScreen_gtkLabel_errors, "Erreur : connexion impossible avec le serveur. Vérifiez votre saisie.");
         puts("CLIENT : Erreur de saisie ou de connexion avec le serveur.");
     }
+>>>>>>> main
 }
 #pragma endregion settings_screen
 #pragma endregion events
@@ -181,11 +194,24 @@ void init_windows(int argc, char **argv){
     //GTK_WIDGET is a cast here because windows is a widget
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    
+    waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
+    g_signal_connect(waitingScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_builder_connect_signals(builder, NULL);
     betrayButton = GTK_WIDGET(gtk_builder_get_object(builder, "betrayButton"));
     collaborateButton = GTK_WIDGET(gtk_builder_get_object(builder, "collaborateButton"));
     buttonFree = GTK_WIDGET(gtk_builder_get_object(builder, "buttonFree"));
 
+<<<<<<< HEAD
+    waitingSpinner = GTK_WIDGET(gtk_builder_get_object(builder, "waitingSpinner"));
+    waitingLabel = GTK_WIDGET(gtk_builder_get_object(builder, "waitingLabel"));
+
+    display_waiting_screen(waitingScreen);
+    display_main_window(window);
+}
+
+
+=======
     // waiting screen
     waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
     waitingSpinner = GTK_WIDGET(gtk_builder_get_object(builder, "waitingSpinner"));
@@ -206,3 +232,4 @@ void init_windows(int argc, char **argv){
     display_screen(settingsScreen);
 }
 #pragma endregion init
+>>>>>>> main
