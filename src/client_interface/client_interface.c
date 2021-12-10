@@ -17,14 +17,10 @@ GtkBuilder *builder;
 
 // choice screen
 GtkWidget *ChoiceScreen;
-GtkButton *betrayButton;
-GtkWidget *collaborateButton;
-/*
-GtkWidget *buttonFree;
-GtkWidget *buttonSixMonth;
-GtkWidget *buttonFiveYears;
-GtkWidget *buttonTenYears;
-*/
+GtkWidget *choiceScreen_label_round;
+GtkWidget *choiceScreen_label_sanction;
+GtkButton *choiceScreen_gtkButton_betray;
+GtkButton *choiceScreen_gtkButton_collaboration;
 
 // waiting screen
 GtkWidget *waitingScreen;
@@ -60,7 +56,7 @@ void on_window_main_destroy() {
  * @param button 
  */
 void on_betrayButton_clicked(GtkButton *button){
-    puts("bettray !");
+    puts("betray !");
     net_client_betray(10);
 }
 
@@ -150,7 +146,8 @@ void add_styles(){
     //load the provider
     gtk_css_provider_load_from_path(cssProvider1, "include/styles/gtk.css", NULL);
     css_set(cssProvider1, ChoiceScreen);
-    css_set(cssProvider1, betrayButton);
+    css_set(cssProvider1, choiceScreen_gtkButton_betray);
+    css_set(cssProvider1, choiceScreen_gtkButton_betray);
 }
 #pragma endregion css
 
@@ -190,9 +187,10 @@ void init_windows(int argc, char **argv){
     //GTK_WIDGET is a cast here because windows is a widget
     ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
     g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    betrayButton = GTK_WIDGET(gtk_builder_get_object(builder, "betrayButton"));
-    collaborateButton = GTK_WIDGET(gtk_builder_get_object(builder, "collaborateButton"));
-    //buttonFree = GTK_WIDGET(gtk_builder_get_object(builder, "buttonFree"));
+    choiceScreen_label_round = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_round"));
+    choiceScreen_label_sanction = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_sanction"));
+    choiceScreen_gtkButton_betray = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_betray"));
+    choiceScreen_gtkButton_collaboration = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_collaboration"));
 
     // waiting screen
     waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
