@@ -2,6 +2,8 @@
     "files.associations": {
         "string.h": "c",
         "client_interface.h": "c",
-        "net_prisoner_common.h": "c"
-    }
+        "net_prisoner_common.h": "c",
+        "gtk.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

@@ -135,7 +135,7 @@ void *_net_client_threadProcess(void *ptr)
  * @param addrServer server address IP
  * @param port server port
  */
-void net_client_init(char *addrServer, int port, int client_id)
+bool net_client_init(char *addrServer, int port, int client_id)
 {
     struct sockaddr_in serverAddr;
     pthread_t thread;
@@ -159,7 +159,7 @@ void net_client_init(char *addrServer, int port, int client_id)
     if (connect(net_client_sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) != 0)
     {
         _net_common_dbg("\nFail to connect to server\n");
-        exit(-1);
+        return false;
     };
 
     // init the client id
@@ -172,6 +172,8 @@ void net_client_init(char *addrServer, int port, int client_id)
     // reading pthread creation
     pthread_create(&thread, 0, _net_client_threadProcess, &net_client_sockfd);
     pthread_detach(thread);
+
+    return true;
 }
 
 /**
