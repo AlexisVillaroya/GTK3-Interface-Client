@@ -115,6 +115,7 @@ void display_waiting_screen(GtkWidget *waitingScreen){
  */
 void display_screen(GtkWidget *screen) {
     gtk_widget_show_all(screen);
+    
 }
 #pragma endregion display
 
@@ -146,8 +147,8 @@ void add_styles(){
     //load the provider
     gtk_css_provider_load_from_path(cssProvider1, "include/styles/gtk.css", NULL);
     css_set(cssProvider1, ChoiceScreen);
-    css_set(cssProvider1, choiceScreen_gtkButton_betray);
-    css_set(cssProvider1, choiceScreen_gtkButton_betray);
+    //css_set(cssProvider1, choiceScreen_gtkButton_betray);
+    //css_set(cssProvider1, choiceScreen_gtkButton_collaboration);
 }
 #pragma endregion css
 
@@ -211,6 +212,6 @@ void init_windows(int argc, char **argv){
     gtk_entry_set_text(settingsScreen_GtkEntry_serverPort, "7799");
     //gtk_entry_set_text(settingsScreen_GtkEntry_clientID, "1");
 
-    display_screen(ChoiceScreen);
+    display_screen(settingsScreen);
 }
 #pragma endregion init
