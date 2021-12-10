@@ -39,6 +39,9 @@ GtkWidget *settingsScreen_GtkEntry_clientID;
 GtkWidget *settingsScreen_gtkButton_valider;
 GtkWidget *settingsScreen_gtkLabel_errors;
 
+// score screen 
+GtkWidget *scoreScreen;
+
 //--------------------------------------
 //               Events
 //--------------------------------------
@@ -208,11 +211,15 @@ void init_windows(int argc, char **argv){
     settingsScreen_GtkEntry_clientID  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkEntry_clientID"));
     settingsScreen_gtkButton_valider  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkButton_Valider"));
     settingsScreen_gtkLabel_errors  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkLabel_errors"));
+
+    // score screen
+    scoreScreen  = GTK_WIDGET(gtk_builder_get_object(builder, "scoreScreen"));
+    g_signal_connect(settingsScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     // default
     gtk_entry_set_text(settingsScreen_GtkEntry_serverIP, "0.0.0.0");
     gtk_entry_set_text(settingsScreen_GtkEntry_serverPort, "7799");
     //gtk_entry_set_text(settingsScreen_GtkEntry_clientID, "1");
 
-    display_screen(ChoiceScreen);
+    display_screen(scoreScreen);
 }
 #pragma endregion init
