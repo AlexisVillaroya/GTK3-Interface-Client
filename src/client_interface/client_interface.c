@@ -10,6 +10,7 @@
  */
 
 #include "client_interface.h" 
+#include "../client_connection/net_prisoner_client.h"
 
 // init all widgets used
 GtkBuilder *builder;
@@ -183,24 +184,25 @@ void init_windows(int argc, char **argv){
     //establish contact with xml code to adjust widget settings
     //builder is the pointer to the digest xml file
     builder = gtk_builder_new_from_file("glade/Interface.glade");
+    gtk_builder_connect_signals(builder, NULL);
 
     // choice screen
     //GTK_WIDGET is a cast here because windows is a widget
     ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
     g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    gtk_builder_connect_signals(builder, NULL);
     betrayButton = GTK_WIDGET(gtk_builder_get_object(builder, "betrayButton"));
     collaborateButton = GTK_WIDGET(gtk_builder_get_object(builder, "collaborateButton"));
-    
     //buttonFree = GTK_WIDGET(gtk_builder_get_object(builder, "buttonFree"));
 
     // waiting screen
     waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
+    g_signal_connect(waitingScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     waitingSpinner = GTK_WIDGET(gtk_builder_get_object(builder, "waitingSpinner"));
     waitingLabel = GTK_WIDGET(gtk_builder_get_object(builder, "waitingLabel"));
 
     // settings screen
     settingsScreen  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen"));
+    g_signal_connect(settingsScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     settingsScreen_GtkEntry_serverIP  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_GtkEntry_serverIP"));
     settingsScreen_GtkEntry_serverPort  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkEntry_serverPort"));
     settingsScreen_GtkEntry_clientID  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkEntry_clientID"));
