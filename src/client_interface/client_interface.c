@@ -13,13 +13,19 @@
 
 // init all widgets used
 GtkBuilder *builder;
-GtkWidget *window;
+
+// choice screen
+GtkWidget *ChoiceScreen;
 GtkButton *betrayButton;
 GtkWidget *collaborateButton;
+/*
 GtkWidget *buttonFree;
 GtkWidget *buttonSixMonth;
 GtkWidget *buttonFiveYears;
 GtkWidget *buttonTenYears;
+*/
+
+// waiting screen
 GtkWidget *waitingScreen;
 GtkWidget *waitingSpinner;
 GtkWidget *waitingLabel;
@@ -43,7 +49,7 @@ GtkWidget *settingsScreen_gtkLabel_errors;
  * @brief Destroy the main window
  */
 void on_window_main_destroy() {
-    printf("quitting\n ");
+    puts("quitting");
     net_client_disconnect(10);
     gtk_main_quit();
 }
@@ -53,7 +59,7 @@ void on_window_main_destroy() {
  * @param button 
  */
 void on_betrayButton_clicked(GtkButton *button){
-    printf("trahison !\n");
+    puts("bettray !");
     net_client_betray(10);
 }
 
@@ -62,14 +68,13 @@ void on_betrayButton_clicked(GtkButton *button){
  * @param button 
  */
 void on_collaborateButton_clicked(GtkButton *button){
-    printf("collaboration !\n");
+    puts("collaboration !");
     net_client_collab(10);
 }
 #pragma endregion choice_screen
 
 // ---------- settings screen ----------
 #pragma region settings_screen
-
 
 void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
 
@@ -83,6 +88,7 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
     }
 }
 #pragma endregion settings_screen
+
 #pragma endregion events
 
 //--------------------------------------
@@ -94,8 +100,8 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
  * @brief 
  * @param window 
  */
-void display_main_window(GtkWidget *window){
-    gtk_widget_show_all(window);
+void display_choice_screen(GtkWidget *choiceScreen){
+    gtk_widget_show_all(choiceScreen);
 }
 
 /**
@@ -142,7 +148,7 @@ void add_styles(){
 
     //load the provider
     gtk_css_provider_load_from_path(cssProvider1, "include/styles/gtk.css", NULL);
-    css_set(cssProvider1, window);
+    css_set(cssProvider1, ChoiceScreen);
     css_set(cssProvider1, betrayButton);
 }
 #pragma endregion css
@@ -162,11 +168,12 @@ ulong delay;
  */
 void init_net_functions() {
     net_client_set_func_waiting_screen(display_waiting_screen);
-    net_client_set_func_choice_screen(display_main_window);
+    net_client_set_func_choice_screen(display_choice_screen);
 }
 
 /**
- * @brief Initialisation of the main windows
+ * @brief Initialisation of the main 
+ * s
  * @param argc 
  * @param argv 
  */
@@ -179,12 +186,13 @@ void init_windows(int argc, char **argv){
 
     // choice screen
     //GTK_WIDGET is a cast here because windows is a widget
-    window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
-    g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
+    g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_builder_connect_signals(builder, NULL);
     betrayButton = GTK_WIDGET(gtk_builder_get_object(builder, "betrayButton"));
     collaborateButton = GTK_WIDGET(gtk_builder_get_object(builder, "collaborateButton"));
-    buttonFree = GTK_WIDGET(gtk_builder_get_object(builder, "buttonFree"));
+    
+    //buttonFree = GTK_WIDGET(gtk_builder_get_object(builder, "buttonFree"));
 
     // waiting screen
     waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
@@ -203,6 +211,6 @@ void init_windows(int argc, char **argv){
     gtk_entry_set_text(settingsScreen_GtkEntry_serverPort, "7799");
     //gtk_entry_set_text(settingsScreen_GtkEntry_clientID, "1");
 
-    display_screen(settingsScreen);
+    display_screen(ChoiceScreen);
 }
 #pragma endregion init
