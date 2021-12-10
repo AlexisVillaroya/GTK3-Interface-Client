@@ -19,22 +19,23 @@
         <child>
           <object class="GtkButton" id="betrayButton">
             <property name="label" translatable="yes">Trahir</property>
-            <property name="width_request">267</property>
-            <property name="height_request">172</property>
+            <property name="width_request">200</property>
+            <property name="height_request">100</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <signal name="clicked" handler="on_betrayButton_clicked" swapped="no"/>
           </object>
           <packing>
+            <property name="x">50</property>
             <property name="y">350</property>
           </packing>
         </child>
         <child>
           <object class="GtkButton" id="collaborateButton">
             <property name="label" translatable="yes">Collaborer</property>
-            <property name="width_request">269</property>
-            <property name="height_request">171</property>
+            <property name="width_request">200</property>
+            <property name="height_request">100</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
