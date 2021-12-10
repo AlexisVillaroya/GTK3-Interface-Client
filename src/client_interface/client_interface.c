@@ -41,6 +41,8 @@ GtkWidget *settingsScreen_gtkLabel_errors;
 
 // score screen 
 GtkWidget *scoreScreen;
+GtkWidget *labelScoreJ1;
+GtkWidget *labelScoreJ2;
 
 //--------------------------------------
 //               Events
@@ -75,6 +77,7 @@ void on_collaborateButton_clicked(GtkButton *button){
     puts("collaboration !");
     net_client_collab(10);
 }
+
 #pragma endregion choice_screen
 
 // ---------- settings screen ----------
@@ -109,8 +112,8 @@ void display_choice_screen(GtkWidget *choiceScreen){
 }
 
 /**
- * @brief 
- * @param waitingScreen 
+ * @brief display waiting screen
+ * @param waitingScreen the widget
  */
 void display_waiting_screen(GtkWidget *waitingScreen){
     gtk_widget_show_all(waitingScreen);
@@ -123,6 +126,15 @@ void display_waiting_screen(GtkWidget *waitingScreen){
 void display_screen(GtkWidget *screen) {
     gtk_widget_show_all(screen);
 }
+
+/** display score screen
+ * @brief 
+ * @param scoreScreen the widget
+ */
+void display_score_screen(GtkWidget *scoreScreen){
+    gtk_widget_show_all(scoreScreen);
+}
+
 #pragma endregion display
 
 //--------------------------------------
@@ -215,11 +227,16 @@ void init_windows(int argc, char **argv){
     // score screen
     scoreScreen  = GTK_WIDGET(gtk_builder_get_object(builder, "scoreScreen"));
     g_signal_connect(settingsScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    labelScoreJ1 = GTK_WIDGET(gtk_builder_get_object(builder, "LabelScoreJ1"));
+    labelScoreJ2  = GTK_WIDGET(gtk_builder_get_object(builder, "LabelScoreJ2"));
+
     // default
     gtk_entry_set_text(settingsScreen_GtkEntry_serverIP, "0.0.0.0");
     gtk_entry_set_text(settingsScreen_GtkEntry_serverPort, "7799");
     //gtk_entry_set_text(settingsScreen_GtkEntry_clientID, "1");
-
+    
+    gtk_label_set_text(GTK_LABEL(labelScoreJ1), "10 ans");
+    gtk_label_set_text(GTK_LABEL(labelScoreJ2), "6 mois"); 
     display_screen(scoreScreen);
 }
 #pragma endregion init

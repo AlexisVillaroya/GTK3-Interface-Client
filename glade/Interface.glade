@@ -192,12 +192,11 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="idScoreJ1">
+          <object class="GtkLabel" id="LabelScoreJ1">
             <property name="width-request">122</property>
             <property name="height-request">32</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">label</property>
           </object>
           <packing>
             <property name="x">224</property>
@@ -205,14 +204,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="idScoreJ2">
+          <object class="GtkLabel" id="LabelScoreJ2">
             <property name="width-request">100</property>
             <property name="height-request">32</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="margin-end">50</property>
             <property name="margin-bottom">50</property>
-            <property name="label" translatable="yes">label</property>
           </object>
           <packing>
             <property name="x">236</property>
@@ -377,6 +375,20 @@
           <packing>
             <property name="x">148</property>
             <property name="y">199</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="readyButton">
+            <property name="label" translatable="yes">Prêt</property>
+            <property name="width-request">155</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="x">193</property>
+            <property name="y">379</property>
           </packing>
         </child>
       </object>
