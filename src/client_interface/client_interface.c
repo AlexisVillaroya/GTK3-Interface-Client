@@ -17,14 +17,10 @@ GtkBuilder *builder;
 
 // choice screen
 GtkWidget *ChoiceScreen;
-GtkButton *betrayButton;
-GtkWidget *collaborateButton;
-/*
-GtkWidget *buttonFree;
-GtkWidget *buttonSixMonth;
-GtkWidget *buttonFiveYears;
-GtkWidget *buttonTenYears;
-*/
+GtkWidget *choiceScreen_label_round;
+GtkWidget *choiceScreen_label_sanction;
+GtkButton *choiceScreen_gtkButton_betray;
+GtkButton *choiceScreen_gtkButton_collaboration;
 
 // waiting screen
 GtkWidget *waitingScreen;
@@ -65,7 +61,7 @@ void on_window_main_destroy() {
  * @param button 
  */
 void on_betrayButton_clicked(GtkButton *button){
-    puts("bettray !");
+    puts("betray !");
     net_client_betray(10);
 }
 
@@ -89,9 +85,11 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
     gint serverPort = atoi(gtk_entry_get_text(settingsScreen_GtkEntry_serverPort));
     gint clientID = atoi(gtk_entry_get_text(settingsScreen_GtkEntry_clientID));
 
+    
     if (!net_client_init(serverIP, serverPort, clientID)) {
         gtk_label_set_label(settingsScreen_gtkLabel_errors, "Erreur : connexion impossible avec le serveur. Vérifiez votre saisie.");
         puts("CLIENT : Erreur de saisie ou de connexion avec le serveur.");
+        perror("ERROR ");
     }
 }
 #pragma endregion settings_screen
@@ -107,15 +105,20 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
  * @brief 
  * @param window 
  */
+<<<<<<< HEAD
 void display_choice_screen(){
     gtk_widget_show_all(choiceScreen);
+=======
+void display_choice_screen() {
+    gtk_widget_show_all(ChoiceScreen);
+>>>>>>> 162da995d7b75313610a5cb92aa768b70acbc0de
 }
 
 /**
  * @brief display waiting screen
  * @param waitingScreen the widget
  */
-void display_waiting_screen(GtkWidget *waitingScreen){
+void display_waiting_screen(){
     gtk_widget_show_all(waitingScreen);
 }
 
@@ -125,6 +128,7 @@ void display_waiting_screen(GtkWidget *waitingScreen){
  */
 void display_screen(GtkWidget *screen) {
     gtk_widget_show_all(screen);
+    
 }
 
 /** display score screen
@@ -165,7 +169,8 @@ void add_styles(){
     //load the provider
     gtk_css_provider_load_from_path(cssProvider1, "include/styles/gtk.css", NULL);
     css_set(cssProvider1, ChoiceScreen);
-    css_set(cssProvider1, betrayButton);
+    //css_set(cssProvider1, choiceScreen_gtkButton_betray);
+    //css_set(cssProvider1, choiceScreen_gtkButton_collaboration);
 }
 #pragma endregion css
 
@@ -188,7 +193,7 @@ void init_net_functions() {
 }
 
 /**
- * @brief Initialisation of the main 
+ * @brief main initialisation 
  * s
  * @param argc 
  * @param argv 
@@ -205,9 +210,10 @@ void init_windows(int argc, char **argv){
     //GTK_WIDGET is a cast here because windows is a widget
     ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
     g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    betrayButton = GTK_WIDGET(gtk_builder_get_object(builder, "betrayButton"));
-    collaborateButton = GTK_WIDGET(gtk_builder_get_object(builder, "collaborateButton"));
-    //buttonFree = GTK_WIDGET(gtk_builder_get_object(builder, "buttonFree"));
+    choiceScreen_label_round = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_round"));
+    choiceScreen_label_sanction = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_sanction"));
+    choiceScreen_gtkButton_betray = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_betray"));
+    choiceScreen_gtkButton_collaboration = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_collaboration"));
 
     // waiting screen
     waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
@@ -234,9 +240,16 @@ void init_windows(int argc, char **argv){
     gtk_entry_set_text(settingsScreen_GtkEntry_serverIP, "0.0.0.0");
     gtk_entry_set_text(settingsScreen_GtkEntry_serverPort, "7799");
     //gtk_entry_set_text(settingsScreen_GtkEntry_clientID, "1");
+<<<<<<< HEAD
     
     gtk_label_set_text(GTK_LABEL(labelScoreJ1), "10 ans");
     gtk_label_set_text(GTK_LABEL(labelScoreJ2), "6 mois"); 
+=======
+
+    // set CSS style
+    add_styles();
+
+>>>>>>> 162da995d7b75313610a5cb92aa768b70acbc0de
     display_screen(settingsScreen);
 }
 #pragma endregion init

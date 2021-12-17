@@ -48,7 +48,7 @@ void _net_common_dbg(const char *format, ...)
         // https://www.cplusplus.com/reference/cstdio/vfprintf/
         vfprintf(stdout, format, arg);
 
-        va_end(arg);
+        //va_end(arg);
 
         // release the semaphore
         //sem_post(&_lock_log_dbg);
