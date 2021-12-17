@@ -86,8 +86,8 @@ void on_collaborateButton_clicked(GtkButton *button){
 void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
 
     gchar * serverIP = gtk_entry_get_text(settingsScreen_GtkEntry_serverIP);
-    gint serverPort = gtk_entry_get_text(settingsScreen_GtkEntry_serverPort);
-    gint clientID = gtk_entry_get_text(settingsScreen_GtkEntry_clientID);
+    gint serverPort = atoi(gtk_entry_get_text(settingsScreen_GtkEntry_serverPort));
+    gint clientID = atoi(gtk_entry_get_text(settingsScreen_GtkEntry_clientID));
 
     if (!net_client_init(serverIP, serverPort, clientID)) {
         gtk_label_set_label(settingsScreen_gtkLabel_errors, "Erreur : connexion impossible avec le serveur. Vérifiez votre saisie.");
@@ -107,7 +107,7 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
  * @brief 
  * @param window 
  */
-void display_choice_screen(GtkWidget *choiceScreen){
+void display_choice_screen(){
     gtk_widget_show_all(choiceScreen);
 }
 
@@ -237,6 +237,6 @@ void init_windows(int argc, char **argv){
     
     gtk_label_set_text(GTK_LABEL(labelScoreJ1), "10 ans");
     gtk_label_set_text(GTK_LABEL(labelScoreJ2), "6 mois"); 
-    display_screen(scoreScreen);
+    display_screen(settingsScreen);
 }
 #pragma endregion init

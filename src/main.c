@@ -13,6 +13,7 @@
 
 int main(int argc, char** argv) {
     //net_client_init("0.0.0.0", 7799, 1);
+    printf("test\n");
     init_net_functions();
     init_windows(argc, argv);
     add_styles();
