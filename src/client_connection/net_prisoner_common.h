@@ -121,7 +121,12 @@ enum _net_common_msg_type {
     /**
      * @brief the client need to display the final result
      */
-    SCREEN_SCORE_FINAL = 8
+    SCREEN_SCORE_FINAL = 8,
+
+    /**
+     * @brief the client as read the result and is ready for the next round
+     */
+    ACTION_READY = 9
 };
 
 /**
@@ -165,7 +170,7 @@ typedef struct {
      */
     int round_total;  
 
-} _net_common_round_score;
+} net_common_round_score;
 
 typedef struct {
 
@@ -175,7 +180,7 @@ typedef struct {
      */
     int result[MAXROUND][2];
 
-} _net_common_final_score;
+} net_common_final_score;
 
 /**
  * @brief  define the structure used to exchanged between the client and the server
@@ -194,12 +199,12 @@ typedef struct {
     /**
      * @brief the score at the end of each round
      */
-    _net_common_round_score round_score;
+    net_common_round_score round_score;
 
     /**
      * @brief the final score at the end of the game
      */
-    _net_common_final_score final_score;
+    net_common_final_score final_score;
 
     /**
      * @brief unique client id defined

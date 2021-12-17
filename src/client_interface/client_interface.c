@@ -76,12 +76,14 @@ void on_collaborateButton_clicked(GtkButton *button){
 void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
 
     gchar * serverIP = gtk_entry_get_text(settingsScreen_GtkEntry_serverIP);
-    gint serverPort = gtk_entry_get_text(settingsScreen_GtkEntry_serverPort);
-    gint clientID = gtk_entry_get_text(settingsScreen_GtkEntry_clientID);
+    gint serverPort = atoi(gtk_entry_get_text(settingsScreen_GtkEntry_serverPort));
+    gint clientID = atoi(gtk_entry_get_text(settingsScreen_GtkEntry_clientID));
 
+    
     if (!net_client_init(serverIP, serverPort, clientID)) {
         gtk_label_set_label(settingsScreen_gtkLabel_errors, "Erreur : connexion impossible avec le serveur. Vérifiez votre saisie.");
         puts("CLIENT : Erreur de saisie ou de connexion avec le serveur.");
+        perror("ERROR ");
     }
 }
 #pragma endregion settings_screen
@@ -97,15 +99,15 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button) {
  * @brief 
  * @param window 
  */
-void display_choice_screen(GtkWidget *choiceScreen){
-    gtk_widget_show_all(choiceScreen);
+void display_choice_screen() {
+    gtk_widget_show_all(ChoiceScreen);
 }
 
 /**
  * @brief 
  * @param waitingScreen 
  */
-void display_waiting_screen(GtkWidget *waitingScreen){
+void display_waiting_screen(){
     gtk_widget_show_all(waitingScreen);
 }
 
@@ -171,7 +173,7 @@ void init_net_functions() {
 }
 
 /**
- * @brief Initialisation of the main 
+ * @brief main initialisation 
  * s
  * @param argc 
  * @param argv 
@@ -211,6 +213,9 @@ void init_windows(int argc, char **argv){
     gtk_entry_set_text(settingsScreen_GtkEntry_serverIP, "0.0.0.0");
     gtk_entry_set_text(settingsScreen_GtkEntry_serverPort, "7799");
     //gtk_entry_set_text(settingsScreen_GtkEntry_clientID, "1");
+
+    // set CSS style
+    add_styles();
 
     display_screen(settingsScreen);
 }

@@ -36,6 +36,34 @@
 extern int net_client_sockfd;
 
 /**
+ * @brief the function used by the library
+ * refering to the defined one by the client
+ * to display the waiting screen
+ */
+void (*_net_client_func_waiting_screen)();
+
+/**
+ * @brief the function used by the library
+ * refering to the defined one by the client
+ * to display the choice screen
+ */
+void (*_net_client_func_choice_screen)();
+
+/**
+ * @brief the function used by the library
+ * refering to the defined one by the client
+ * to display the score screen of the round
+ */
+void (*_net_client_func_score_screen)(net_common_round_score);
+
+/**
+ * @brief the function used by the library
+ * refering to the defined one by the client
+ * to display the final score of the game
+ */
+void (*_net_client_func_score_final)(net_common_final_score);
+
+/**
  * @brief define the function using the defined
  * one by the client to display the wainting screen
  * @param f the client function 
@@ -57,12 +85,24 @@ void * net_client_set_func_choice_screen(void (*f)());
 void * net_client_set_func_score_screen(void (*f)());
 
 /**
+ * @brief define the function using the defined
+ * one by the client to display the score screen
+ * @param f the client function 
+ */
+void *net_client_set_func_score_final(void (*f)());
+
+/**
  * @brief open the connexion with the server
  * @param addrServer server address IP
  * @param port server port
  * @return if the connection with the server is OK
  */
 bool net_client_init(char *addrServer, int port, int client_id);
+
+/**
+ * @brief The client is ready for the next round
+ */
+void net_client_ready();
 
 /**
  * @brief The client want to betray the other player
