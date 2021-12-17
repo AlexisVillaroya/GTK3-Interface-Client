@@ -52,6 +52,11 @@
  */
 #define MAXSIMULTANEOUSCLIENTS 100
 
+/**
+ * @brief max round possible 
+ */
+#define MAXROUND 10
+
 // ----------------------------------------------
 //                     Common
 // ----------------------------------------------
@@ -76,31 +81,36 @@ void _net_common_init();
  * @brief define all the messages type exchanged between the client and the server
  */
 enum _net_common_msg_type {
+    
     /**
      * @brief the client betray the other
      */
     ACTION_BETRAY = 0,
+    
     /**
      * @brief the client collab with the other
      */
     ACTION_COLLAB = 1,
+    
     /**
      * @brief the client quit the game
      */
     ACTION_QUIT = 2,
+    
     /**
      * @brief the client need to display the waiting screen before the game start
      */
     SCREEN_WAITING = 4,
+    
     /**
      * @brief the client need to make a choice
      */
     SCREEN_CHOICE = 5,
+    
     /**
-     * @brief the client need to display the score,
-     * int score contain the score 
+     * @brief the client need to display the round result
      */
-    SCREEN_SCORE = 6,
+    SCREEN_SCORE_ROUND = 6,
 
     /**
      * @brief the client sent his id just after
@@ -108,8 +118,69 @@ enum _net_common_msg_type {
      */
     INIT_CLIENT_ID = 7,
 
+    /**
+     * @brief the client need to display the final result
+     */
+    SCREEN_SCORE_FINAL = 8,
 
+    /**
+     * @brief the client as read the result and is ready for the next round
+     */
+    ACTION_READY = 9
 };
+
+/**
+ * @brief player's actions
+ */
+enum _net_common_client_action {
+
+    /**
+     * @brief the player collab
+     */
+    COLLABORATE = 0,
+
+    /**
+     * @brief the player betray the other
+     */
+    BETRAY = 1
+};
+
+/**
+ * @brief player's round score
+ */
+typedef struct {
+
+    /**
+     * @brief player score
+     */
+    int player_score;
+
+    /**
+     * @brief true if the player win
+     */
+    bool round_has_win;
+
+    /**
+     * @brief actual round
+     */
+    int round_actual;
+
+    /**
+     * @brief game total round
+     */
+    int round_total;  
+
+} net_common_round_score;
+
+typedef struct {
+
+    /**
+     * @brief the tab that contains each score of the game
+     * his size is set with the defined MAXROUND, for 2 players
+     */
+    int result[MAXROUND][2];
+
+} net_common_final_score;
 
 /**
  * @brief  define the structure used to exchanged between the client and the server
@@ -126,14 +197,14 @@ typedef struct {
     ulong delay;
 
     /**
-     * @brief player score
+     * @brief the score at the end of each round
      */
-    int score;
+    net_common_round_score round_score;
 
     /**
-     * @brief true if the player win
+     * @brief the final score at the end of the game
      */
-    bool has_win;
+    net_common_final_score final_score;
 
     /**
      * @brief unique client id defined

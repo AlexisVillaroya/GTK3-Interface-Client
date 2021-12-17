@@ -18,6 +18,8 @@
   background-color: #ffffff;
   /*background-color: rgba(240, 240, 240, 0.999);*/ }
 
+
+
 *:disabled {
   -gtk-icon-effect: dim; }
 

@@ -13,7 +13,10 @@
             "linux": {
                 "MIMode": "gdb",
                 "miDebuggerPath": "gdb",
-                "program": "${workspaceFolder}/output/main"
+                "program": "${workspaceFolder}/output/main",
+                "sourceFileMap": {
+                    "/build/glibc-eX1tMB": "/usr/src/glibc"
+                }
             },
             "osx": {
                 "MIMode": "lldb",
