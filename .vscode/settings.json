@@ -5,5 +5,5 @@
         "net_prisoner_common.h": "c",
         "gtk.h": "c"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Enabled"
 }

@@ -177,12 +177,16 @@ bool net_client_init(char *addrServer, int port, int client_id)
 
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
 
+    //connect(net_client_sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr));
+
+    
     //Connect the socket to the server using the address
     if (connect(net_client_sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) != 0)
     {
         _net_common_dbg("\nFail to connect to server\n");
         return false;
     };
+    
 
     // init the client id
     _net_common_netpacket packet;
