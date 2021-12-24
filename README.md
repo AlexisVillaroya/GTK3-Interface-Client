@@ -8,7 +8,6 @@ Vous y retrouverez donc l'interface client permettant d'intéragir avec le serve
 - Fedora, CentOS, RHEL :
 ```
 dnf install glade gtk3-devel gtk+-devel gtk3-devel-docs
-
 ```
 - Ubuntu:
 ```
