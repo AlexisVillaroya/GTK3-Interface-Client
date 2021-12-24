@@ -79,7 +79,6 @@ void on_collaborateButton_clicked(GtkButton *button)
 
 void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button)
 {
-
     gchar *serverIP = gtk_entry_get_text(settingsScreen_GtkEntry_serverIP);
     gint serverPort = atoi(gtk_entry_get_text(settingsScreen_GtkEntry_serverPort));
     gint clientID = atoi(gtk_entry_get_text(settingsScreen_GtkEntry_clientID));
@@ -148,7 +147,7 @@ void handle_round_score(net_common_round_score round_score)
 
     // creation of the result string
     char *result = malloc(sizeof(char) * 64);
-    sprintf(result, "Result round %d/%d :\n\t", round_score.round_actual, round_score.round_total);
+    sprintf(result, "Round result %d/%d :\n\t", round_score.round_actual, round_score.round_total);
 
     char *tmp = malloc(sizeof(char) * 15);
     if (round_score.round_has_win)
@@ -182,7 +181,7 @@ void handle_final_score(net_common_final_score final_score)
 
     char *result = malloc(sizeof(char) * 300);
 
-    strcpy(result, "Final result :\n|\tRound\t|\tYou\t|\tOther\t|\n");
+    strcpy(result, "Final result :\n|\tRound\t|\tYou\t|\tP2\t|\n");
 
     for (int round = 0; round < MAXROUND; round++)
     {
@@ -226,9 +225,9 @@ void add_styles()
 
     // load the provider
     gtk_css_provider_load_from_path(cssProvider1, "include/styles/gtk.css", NULL);
-    // css_set(cssProvider1, ChoiceScreen);
-    // css_set(cssProvider1, choiceScreen_gtkButton_betray);
-    // css_set(cssProvider1, choiceScreen_gtkButton_collaboration);
+    css_set(cssProvider1, ChoiceScreen);
+    css_set(cssProvider1, choiceScreen_gtkButton_betray);
+    css_set(cssProvider1, choiceScreen_gtkButton_collaboration);
 }
 #pragma endregion css
 
@@ -249,6 +248,8 @@ void init_net_functions()
 {
     net_client_set_func_waiting_screen(display_waiting_screen);
     net_client_set_func_choice_screen(display_choice_screen);
+    net_client_set_func_score_round(handle_round_score);
+    net_client_set_func_score_final(handle_final_score);
 }
 
 /**
@@ -291,7 +292,7 @@ void init_windows(int argc, char **argv)
     settingsScreen_gtkLabel_errors = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkLabel_errors"));
 
     // default
-    gtk_entry_set_text(settingsScreen_GtkEntry_serverIP, "127.0.0.1");
+    gtk_entry_set_text(settingsScreen_GtkEntry_serverIP, "0.0.0.0");
     gtk_entry_set_text(settingsScreen_GtkEntry_serverPort, "7799");
     // gtk_entry_set_text(settingsScreen_GtkEntry_clientID, "1");
 

@@ -54,7 +54,7 @@ void (*_net_client_func_choice_screen)();
  * refering to the defined one by the client
  * to display the score screen of the round
  */
-void (*_net_client_func_score_screen)(net_common_round_score);
+void (*_net_client_func_score_round)(net_common_round_score);
 
 /**
  * @brief the function used by the library
@@ -79,10 +79,10 @@ void * net_client_set_func_choice_screen(void (*f)());
 
 /**
  * @brief define the function using the defined
- * one by the client to display the score screen
+ * one by the client to display the score at the end of the round
  * @param f the client function 
  */
-void * net_client_set_func_score_screen(void (*f)());
+void *net_client_set_func_score_round(void (*f)());
 
 /**
  * @brief define the function using the defined

@@ -46,7 +46,7 @@ void (*_net_client_func_choice_screen)();
  * refering to the defined one by the client
  * to display the score screen of the round
  */
-void (*_net_client_func_score_screen)(net_common_round_score);
+void (*_net_client_func_score_round)(net_common_round_score);
 
 /**
  * @brief the function used by the library
@@ -77,7 +77,7 @@ void *net_client_set_func_choice_screen(void (*f)())
 
 /**
  * @brief define the function using the defined
- * one by the client to display the score screen
+ * one by the client to display the final score
  * @param f the client function 
  */
 void *net_client_set_func_score_final(void (*f)())
@@ -87,12 +87,22 @@ void *net_client_set_func_score_final(void (*f)())
 
 /**
  * @brief define the function using the defined
+ * one by the client to display the score at the end of the round
+ * @param f the client function 
+ */
+void *net_client_set_func_score_round(void (*f)())
+{
+    _net_client_func_score_round = f;
+}
+
+/**
+ * @brief define the function using the defined
  * one by the client to display the score screen
  * @param f the client function 
  */
 void *net_client_set_func_score_screen(void (*f)())
 {
-    _net_client_func_score_screen = f;
+    _net_client_func_score_round = f;
 }
 
 /**
@@ -117,12 +127,20 @@ void _net_client_event(_net_common_netpacket packet)
 
     case SCREEN_SCORE_ROUND:
         _net_common_dbg("Client %d received SCREEN_SCORE_ROUND from server\n", net_client_id);
-        (*_net_client_func_score_screen)(packet.round_score);
+        (*_net_client_func_score_round)(packet.round_score);
         break;
 
     case SCREEN_SCORE_FINAL:
         _net_common_dbg("Client %d received SCREEN_SCORE_FINAL from server\n", net_client_id);
         (*_net_client_func_score_final)(packet.final_score);
+        break;
+
+    case ACTION_BETRAY:
+    case ACTION_COLLAB:
+    case ACTION_QUIT:
+    case INIT_CLIENT_ID:
+    case ACTION_READY:
+        _net_common_dbg("Server error: client don't have to receive this message\n");
         break;
 
     default:
