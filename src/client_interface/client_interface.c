@@ -100,29 +100,44 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button)
 #pragma region display
 
 /**
- * @brief
- * @param window
+ * @brief hide waiting screen and display the choice screen
  */
 void display_choice_screen()
 {
 
     gtk_builder_connect_signals(builder, NULL);
+    waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
 
-    settingsScreen = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen"));
     ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
+    g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    choiceScreen_label_round = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_round"));
+    choiceScreen_label_sanction = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_sanction"));
+    choiceScreen_gtkButton_betray = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_betray"));
+    choiceScreen_gtkButton_collaboration = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_collaboration"));
 
-    gtk_widget_hide(settingsScreen);
+    gtk_widget_hide(waitingScreen);
 
     gtk_widget_show(ChoiceScreen);
 }
 
 /**
- * @brief
- * @param waitingScreen
+ * @brief hide setting screen and display the waiting screen
  */
 void display_waiting_screen()
 {
-    gtk_widget_show_all(waitingScreen);
+
+    gtk_builder_connect_signals(builder, NULL);
+
+    settingsScreen = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen"));
+
+    waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
+    waitingSpinner = GTK_WIDGET(gtk_builder_get_object(builder, "waitingSpinner"));
+    waitingLabel = GTK_WIDGET(gtk_builder_get_object(builder, "waitingLabel"));
+    g_signal_connect(waitingScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+
+    gtk_widget_hide(settingsScreen);
+
+    gtk_widget_show(waitingScreen);
 }
 
 /**
@@ -164,8 +179,15 @@ void handle_round_score(net_common_round_score round_score)
     sprintf(score, "Your score : %d", round_score.player_score);
     strcat(result, score);
 
+    char *round = malloc(sizeof(char) * 15);
+    sprintf(round, "Round :\n%d/%d", round_score.round_actual, round_score.round_total);
+    char *sanction = malloc(sizeof(char) * 15);
+    sprintf(sanction, "Sanction :\n%d", round_score.player_score);
+
     // display
     gtk_label_set_text(choiceScreen_textView_result, result);
+    gtk_label_set_text(choiceScreen_label_round, round);
+    gtk_label_set_text(choiceScreen_label_sanction, sanction);
 }
 
 /**
@@ -179,19 +201,39 @@ void handle_final_score(net_common_final_score final_score)
     ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
     choiceScreen_textView_result = GTK_WIDGET(gtk_builder_get_object(builder, "choice_screen_textView_result"));
 
+    // memory allocation
+    int total_J1 = 0;
+    int total_J2 = 0;
     char *result = malloc(sizeof(char) * 300);
+    char *total = malloc(sizeof(char) * 25);
 
+    // tab
     strcpy(result, "Final result :\n|\tRound\t|\tYou\t|\tP2\t|\n");
-
     for (int round = 0; round < MAXROUND; round++)
     {
         char *rnd_str = malloc(sizeof(char) * 20);
-        sprintf(rnd_str, "|\t%d\t|\t%d\t|\t%d\t|\n", round+1, final_score.result[round][0], final_score.result[round][1]);
+        sprintf(rnd_str, "|\t%d\t|\t%d\t|\t%d\t|\n", round + 1, final_score.result[round][0], final_score.result[round][1]);
         strcat(result, rnd_str);
+        free(rnd_str);
+
+        total_J1 += final_score.result[round][0];
+        total_J2 += final_score.result[round][1];
     }
+
+    // total
+    sprintf(total, "|\tTotal\t|\t%d\t|\t%d\t|\n", total_J1, total_J2);
+    strcat(result, total);
+
+    // labels
+    char *round = malloc(sizeof(char) * 15);
+    sprintf(round, "Round :\n%d/%d", MAXROUND, MAXROUND);
+    char *sanction = malloc(sizeof(char) * 15);
+    sprintf(sanction, "Sanction :\n%d", total_J1);
 
     // display
     gtk_label_set_text(choiceScreen_textView_result, result);
+    gtk_label_set_text(choiceScreen_label_round, round);
+    gtk_label_set_text(choiceScreen_label_sanction, sanction);
 }
 
 #pragma endregion display
@@ -210,9 +252,10 @@ void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget)
 {
     GtkStyleContext *context = gtk_widget_get_style_context(g_widget);
 
-    gtk_style_context_add_provider(context,
-                                   GTK_STYLE_PROVIDER(cssProvider),
-                                   GTK_STYLE_PROVIDER_PRIORITY_USER);
+    gtk_style_context_add_provider(
+        context,
+        GTK_STYLE_PROVIDER(cssProvider),
+        GTK_STYLE_PROVIDER_PRIORITY_USER);
 }
 
 /**
@@ -269,8 +312,8 @@ void init_windows(int argc, char **argv)
 
     // choice screen
     // GTK_WIDGET is a cast here because windows is a widget
-    // ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
-    // g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
+    g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     choiceScreen_label_round = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_round"));
     choiceScreen_label_sanction = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_sanction"));
     choiceScreen_gtkButton_betray = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_betray"));
