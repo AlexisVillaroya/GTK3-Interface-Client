@@ -125,27 +125,6 @@ void on_waitingScreen_button_ready_clicked(GtkButton *button)
 #pragma region display
 
 /**
- * @brief hide waiting screen and display the choice screen
- */
-void display_choice_screen()
-{
-
-    gtk_builder_connect_signals(builder, NULL);
-    waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
-
-    ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
-    g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    choiceScreen_label_round = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_round"));
-    choiceScreen_label_sanction = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_sanction"));
-    choiceScreen_gtkButton_betray = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_betray"));
-    choiceScreen_gtkButton_collaboration = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_collaboration"));
-
-    gtk_widget_hide(waitingScreen);
-
-    gtk_widget_show(ChoiceScreen);
-}
-
-/**
  * @brief hide setting screen and display the waiting screen
  */
 void display_waiting_screen()
@@ -168,8 +147,38 @@ void display_waiting_screen()
 }
 
 /**
+ * @brief hide waiting screen and display the choice screen
+ */
+void display_choice_screen(net_common_round_score round_score)
+{
+    round_score.round_total = 5;
+
+    gtk_builder_connect_signals(builder, NULL);
+    waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
+
+    ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
+    g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    choiceScreen_label_round = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_round"));
+    choiceScreen_label_sanction = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_label_sanction"));
+    choiceScreen_gtkButton_betray = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_betray"));
+    choiceScreen_gtkButton_collaboration = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_collaboration"));
+
+    gtk_widget_hide(waitingScreen);
+
+    gtk_widget_show(ChoiceScreen);
+
+    // labels
+    char *round = malloc(sizeof(char) * 15);
+    sprintf(round, "Round :\n1/%d", round_score.round_total);
+
+    gtk_label_set_text(choiceScreen_label_round, round);
+    gtk_label_set_text(choiceScreen_label_sanction, "Sanction :\n0");
+
+}
+
+/**
  * @brief display the screen
- * @param settingsScreen the widget
+ * @param screen the widget
  */
 void display_screen(GtkWidget *screen)
 {
@@ -370,8 +379,8 @@ void init_windows(int argc, char **argv)
 
     // set CSS style
     add_styles();
-  
-    // display_screen(settingsScreen);
+    
+    // inital screen
     gtk_widget_show(settingsScreen);
 }
 #pragma endregion init

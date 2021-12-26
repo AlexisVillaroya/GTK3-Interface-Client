@@ -47,7 +47,7 @@ extern void (*_net_client_func_waiting_screen)();
  * refering to the defined one by the client
  * to display the choice screen
  */
-extern void (*_net_client_func_choice_screen)();
+extern void (*_net_client_func_choice_screen)(net_common_round_score);
 
 /**
  * @brief the function used by the library

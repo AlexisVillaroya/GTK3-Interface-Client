@@ -39,7 +39,7 @@ void (*_net_client_func_waiting_screen)();
  * refering to the defined one by the client
  * to display the choice screen
  */
-void (*_net_client_func_choice_screen)();
+void (*_net_client_func_choice_screen)(net_common_round_score);
 
 /**
  * @brief the function used by the library
@@ -122,7 +122,7 @@ void _net_client_event(_net_common_netpacket packet)
 
     case SCREEN_CHOICE:
         _net_common_dbg("Client %d received SCREEN_CHOICE from server\n", net_client_id);
-        (*_net_client_func_choice_screen)();
+        (*_net_client_func_choice_screen)(packet.round_score);
         break;
 
     case SCREEN_SCORE_ROUND:
