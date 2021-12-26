@@ -26,8 +26,9 @@ GtkWidget *choiceScreen_textView_result;
 
 // waiting screen
 GtkWidget *waitingScreen;
-GtkWidget *waitingSpinner;
-GtkWidget *waitingLabel;
+GtkWidget *waitingScreen_spinner;
+GtkWidget *waitingScreen_label_waiting;
+GtkWidget *waitingScreen_button_ready;
 
 // settings screen
 GtkWidget *settingsScreen;
@@ -84,6 +85,10 @@ void on_collaborateButton_clicked(GtkButton *button)
 // ---------- settings screen ----------
 #pragma region settings_screen
 
+/**
+ * @brief init server connexion with the entry 
+ * @param button the clicked button
+ */
 void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button)
 {
     gchar *serverIP = gtk_entry_get_text(settingsScreen_GtkEntry_serverIP);
@@ -98,6 +103,19 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button)
     }
 }
 #pragma endregion settings_screen
+
+// ---------- waiting screen ----------
+#pragma region waiting_screen
+/**
+ * @brief send that the client is ready to play to the server
+ * @param button the clicked button
+ */
+void on_waitingScreen_button_ready_clicked(GtkButton *button)
+{
+    puts("CLIENT : is ready to play !");
+    net_client_ready();
+}
+#pragma endregion waiting_screen
 
 #pragma endregion events
 
@@ -138,8 +156,10 @@ void display_waiting_screen()
     settingsScreen = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen"));
 
     waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
-    waitingSpinner = GTK_WIDGET(gtk_builder_get_object(builder, "waitingSpinner"));
-    waitingLabel = GTK_WIDGET(gtk_builder_get_object(builder, "waitingLabel"));
+    waitingScreen_spinner  = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen_spinner"));
+    waitingScreen_label_waiting = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen_label_waiting"));
+    waitingScreen_button_ready = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen_button_ready"));
+
     g_signal_connect(waitingScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
     gtk_widget_hide(settingsScreen);
@@ -330,8 +350,9 @@ void init_windows(int argc, char **argv)
     // waiting screen
     waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
     g_signal_connect(waitingScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    waitingSpinner = GTK_WIDGET(gtk_builder_get_object(builder, "waitingSpinner"));
-    waitingLabel = GTK_WIDGET(gtk_builder_get_object(builder, "waitingLabel"));
+    waitingScreen_spinner  = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen_spinner"));
+    waitingScreen_label_waiting = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen_label_waiting"));
+    waitingScreen_button_ready = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen_button_ready"));
 
     // settings screen
     settingsScreen = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen"));

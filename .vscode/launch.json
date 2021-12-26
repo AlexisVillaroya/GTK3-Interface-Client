@@ -11,7 +11,7 @@
       "stopAtEntry": false,
       "cwd": "/home/wolo/GTK3-Interface-Client",
       "environment": [],
-      "program": "/home/wolo/GTK3-Interface-Client/build/Debug/outDebug",
+      "program": "/home/wolo/GTK3-Interface-Client/output/main",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",

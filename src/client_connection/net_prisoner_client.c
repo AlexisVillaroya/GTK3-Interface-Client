@@ -222,7 +222,7 @@ bool net_client_init(char *addrServer, int port, int client_id)
 }
 
 /**
- * @brief The client is ready for the next round
+ * @brief The client is ready for the next round or to play
  */
 void net_client_ready()
 {

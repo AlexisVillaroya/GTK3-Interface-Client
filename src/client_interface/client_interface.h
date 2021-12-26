@@ -41,9 +41,22 @@ void on_collaborateButton_clicked(GtkButton *button);
 // ---------- settings screen ----------
 #pragma region settings_screen
 
+/**
+ * @brief init server connexion with the entry 
+ * @param button the clicked button
+ */
 void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button);
 
 #pragma endregion settings_screen
+
+// ---------- waiting screen ----------
+#pragma region waiting_screen
+/**
+ * @brief send that the client is ready to play to the server
+ * @param button the clicked button
+ */
+void on_waitingScreen_button_ready_clicked(GtkButton *button);
+#pragma endregion waiting_screen
 
 #pragma endregion events
 //--------------------------------------

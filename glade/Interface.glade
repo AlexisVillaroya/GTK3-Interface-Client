@@ -254,7 +254,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkSpinner" id="spinner">
+          <object class="GtkSpinner" id="waitingScreen_spinner">
             <property name="width_request">180</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
@@ -267,7 +267,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="waitingLabel">
+          <object class="GtkLabel" id="waitingScreen_label_waiting">
             <property name="width_request">219</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
@@ -280,13 +280,15 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="readyButton">
+          <object class="GtkButton" id="waitingScreen_button_ready">
             <property name="label" translatable="yes">Prêt</property>
+            <property name="name">waitingScreen_button_ready</property>
             <property name="width_request">155</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="on_waitingScreen_button_ready_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="x">193</property>
