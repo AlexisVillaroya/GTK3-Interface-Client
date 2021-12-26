@@ -127,7 +127,6 @@ void display_choice_screen()
     gtk_widget_show(ChoiceScreen);
 }
 
-
 /**
  * @brief hide setting screen and display the waiting screen
  */

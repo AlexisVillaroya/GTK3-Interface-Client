@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
+<!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkWindow" id="ChoiceScreen">
@@ -14,19 +14,18 @@
     <child>
       <object class="GtkFixed" id="choiceScreen_gtkFixed">
         <property name="visible">True</property>
-        <property name="can-focus">False</property>
+        <property name="can_focus">False</property>
         <child>
           <object class="GtkButton" id="choiceScreen_gtkButton_betray">
             <property name="label" translatable="yes">Trahir</property>
             <property name="width_request">200</property>
             <property name="height_request">50</property>
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
             <signal name="clicked" handler="on_betrayButton_clicked" swapped="no"/>
           </object>
           <packing>
-            <property name="y">350</property>
             <property name="x">53</property>
             <property name="y">214</property>
           </packing>
@@ -37,8 +36,8 @@
             <property name="width_request">200</property>
             <property name="height_request">50</property>
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
             <signal name="clicked" handler="on_collaborateButton_clicked" swapped="no"/>
           </object>
           <packing>
@@ -51,7 +50,7 @@
             <property name="width_request">300</property>
             <property name="height_request">60</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">Dilemme du prisonnier</property>
             <attributes>
               <attribute name="font-desc" value="Source Code Pro 10"/>
@@ -99,7 +98,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkLabel" id="choice_screen_textView_result">
             <property name="name">choice_screen_textView_result</property>
             <property name="width_request">427</property>
             <property name="height_request">86</property>
@@ -119,18 +118,21 @@
     <property name="name">settingsScreen</property>
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
-    <property name="default-width">600</property>
-    <property name="default-height">350</property>
+    <property name="default_width">600</property>
+    <property name="default_height">350</property>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkFixed" id="settingsFixed">
         <property name="visible">True</property>
-        <property name="can-focus">False</property>
+        <property name="can_focus">False</property>
         <child>
           <object class="GtkLabel" id="settingsScreen_label_serverIP">
-            <property name="width-request">149</property>
-            <property name="height-request">41</property>
+            <property name="width_request">149</property>
+            <property name="height_request">41</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">Adresse IP du serveur :</property>
           </object>
           <packing>
@@ -140,13 +142,13 @@
         </child>
         <child>
           <object class="GtkLabel" id="settingsScreen_label_serverPort">
-            <property name="width-request">100</property>
-            <property name="height-request">43</property>
+            <property name="width_request">100</property>
+            <property name="height_request">43</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">port :</property>
-            <property name="width-chars">10</property>
-            <property name="max-width-chars">22</property>
+            <property name="width_chars">10</property>
+            <property name="max_width_chars">22</property>
           </object>
           <packing>
             <property name="x">110</property>
@@ -155,10 +157,10 @@
         </child>
         <child>
           <object class="GtkAccelLabel" id="settingsScreen_label_clientID">
-            <property name="width-request">67</property>
-            <property name="height-request">36</property>
+            <property name="width_request">67</property>
+            <property name="height_request">36</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">ID :</property>
           </object>
           <packing>
@@ -168,12 +170,12 @@
         </child>
         <child>
           <object class="GtkEntry" id="settingsScreen_GtkEntry_serverIP">
-            <property name="width-request">288</property>
-            <property name="height-request">39</property>
+            <property name="width_request">288</property>
+            <property name="height_request">39</property>
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="max-length">15</property>
-            <property name="input-purpose">number</property>
+            <property name="can_focus">True</property>
+            <property name="max_length">15</property>
+            <property name="input_purpose">number</property>
           </object>
           <packing>
             <property name="x">194</property>
@@ -182,11 +184,11 @@
         </child>
         <child>
           <object class="GtkEntry" id="settingsScreen_gtkEntry_serverPort">
-            <property name="width-request">167</property>
-            <property name="height-request">34</property>
+            <property name="width_request">167</property>
+            <property name="height_request">34</property>
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="input-purpose">number</property>
+            <property name="can_focus">True</property>
+            <property name="input_purpose">number</property>
           </object>
           <packing>
             <property name="x">197</property>
@@ -195,11 +197,11 @@
         </child>
         <child>
           <object class="GtkEntry" id="settingsScreen_gtkEntry_clientID">
-            <property name="width-request">168</property>
-            <property name="height-request">34</property>
+            <property name="width_request">168</property>
+            <property name="height_request">34</property>
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="input-purpose">number</property>
+            <property name="can_focus">True</property>
+            <property name="input_purpose">number</property>
           </object>
           <packing>
             <property name="x">197</property>
@@ -209,11 +211,11 @@
         <child>
           <object class="GtkButton" id="settingsScreen_gtkButton_Valider">
             <property name="label" translatable="yes">Valider</property>
-            <property name="width-request">100</property>
-            <property name="height-request">39</property>
+            <property name="width_request">100</property>
+            <property name="height_request">39</property>
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
             <signal name="clicked" handler="on_settingsScreen_gtkButton_Valider_clicked" swapped="no"/>
           </object>
           <packing>
@@ -223,10 +225,10 @@
         </child>
         <child>
           <object class="GtkLabel" id="settingsScreen_label_Errors">
-            <property name="width-request">326</property>
-            <property name="height-request">72</property>
+            <property name="width_request">326</property>
+            <property name="height_request">72</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
+            <property name="can_focus">False</property>
           </object>
           <packing>
             <property name="x">34</property>
@@ -242,18 +244,21 @@
     <property name="height_request">500</property>
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
-    <property name="default-width">600</property>
-    <property name="default-height">600</property>
+    <property name="default_width">600</property>
+    <property name="default_height">600</property>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkFixed" id="waitingFixed">
         <property name="visible">True</property>
-        <property name="can-focus">False</property>
+        <property name="can_focus">False</property>
         <child>
           <object class="GtkSpinner" id="spinner">
-            <property name="width-request">180</property>
-            <property name="height-request">80</property>
+            <property name="width_request">180</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
+            <property name="can_focus">False</property>
             <property name="active">True</property>
           </object>
           <packing>
@@ -263,10 +268,10 @@
         </child>
         <child>
           <object class="GtkLabel" id="waitingLabel">
-            <property name="width-request">219</property>
-            <property name="height-request">80</property>
+            <property name="width_request">219</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">En attente des autres joueurs...</property>
           </object>
           <packing>
@@ -277,11 +282,11 @@
         <child>
           <object class="GtkButton" id="readyButton">
             <property name="label" translatable="yes">Prêt</property>
-            <property name="width-request">155</property>
-            <property name="height-request">80</property>
+            <property name="width_request">155</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
           </object>
           <packing>
             <property name="x">193</property>
