@@ -88,6 +88,9 @@ clean:
 	$(RM) $(call FIXPATH,$(OBJECTS))
 	@echo Cleanup complete!
 
+documentation: 
+	@doxygen configDoxygen
+
 run: all
 	./$(OUTPUTMAIN)
 	@echo Executing 'run: all' complete!
