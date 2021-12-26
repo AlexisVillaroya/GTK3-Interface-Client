@@ -212,6 +212,7 @@ bool net_client_init(char *addrServer, int port, int client_id)
     packet.client_id = client_id;
     write(net_client_sockfd, &packet, sizeof(packet));
     _net_common_dbg("the client sent his id : %d\n", net_client_id);
+    _net_common_dbg("size %d\n", sizeof(packet));
 
     // reading pthread creation
     pthread_create(&thread, 0, _net_client_threadProcess, &net_client_sockfd);

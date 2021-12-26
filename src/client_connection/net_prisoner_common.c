@@ -36,7 +36,7 @@ void _net_common_dbg(const char *format, ...)
     if (NETDEBUG)
     {
         // grab the semaphore
-        sem_wait(&_lock_log_dbg);
+        //sem_wait(&_lock_log_dbg);
 
         printf("NET: ");
 

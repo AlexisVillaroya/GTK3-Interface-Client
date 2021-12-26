@@ -9,6 +9,7 @@
  *
  */
 
+#include <X11/Xlib.h>
 #include "client_interface.h"
 #include "../client_connection/net_prisoner_client.h"
 
@@ -125,7 +126,7 @@ void display_choice_screen()
 
     gtk_widget_show(ChoiceScreen);
 }
-}
+
 
 /**
  * @brief hide setting screen and display the waiting screen
@@ -310,6 +311,7 @@ void init_net_functions()
  */
 void init_windows(int argc, char **argv)
 {
+    XInitThreads();
     gtk_init(&argc, &argv);
 
     // establish contact with xml code to adjust widget settings
