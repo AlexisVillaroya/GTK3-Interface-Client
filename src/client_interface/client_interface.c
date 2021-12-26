@@ -36,6 +36,11 @@ GtkWidget *settingsScreen_GtkEntry_clientID;
 GtkWidget *settingsScreen_gtkButton_valider;
 GtkWidget *settingsScreen_gtkLabel_errors;
 
+// score screen 
+GtkWidget *scoreScreen;
+GtkWidget *labelScoreJ1;
+GtkWidget *labelScoreJ2;
+
 //--------------------------------------
 //               Events
 //--------------------------------------
@@ -72,6 +77,7 @@ void on_collaborateButton_clicked(GtkButton *button)
     puts("CLIENT : collaboration !");
     net_client_collab(10);
 }
+
 #pragma endregion choice_screen
 
 // ---------- settings screen ----------
@@ -118,6 +124,7 @@ void display_choice_screen()
     gtk_widget_hide(waitingScreen);
 
     gtk_widget_show(ChoiceScreen);
+}
 }
 
 /**
@@ -328,11 +335,11 @@ void init_windows(int argc, char **argv)
     // settings screen
     settingsScreen = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen"));
     g_signal_connect(settingsScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    settingsScreen_GtkEntry_serverIP = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_GtkEntry_serverIP"));
-    settingsScreen_GtkEntry_serverPort = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkEntry_serverPort"));
-    settingsScreen_GtkEntry_clientID = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkEntry_clientID"));
-    settingsScreen_gtkButton_valider = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkButton_Valider"));
-    settingsScreen_gtkLabel_errors = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkLabel_errors"));
+    settingsScreen_GtkEntry_serverIP  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_GtkEntry_serverIP"));
+    settingsScreen_GtkEntry_serverPort  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkEntry_serverPort"));
+    settingsScreen_GtkEntry_clientID  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkEntry_clientID"));
+    settingsScreen_gtkButton_valider  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkButton_Valider"));
+    settingsScreen_gtkLabel_errors  = GTK_WIDGET(gtk_builder_get_object(builder, "settingsScreen_gtkLabel_errors"));
 
     // default
     gtk_entry_set_text(settingsScreen_GtkEntry_serverIP, "0.0.0.0");
@@ -341,7 +348,7 @@ void init_windows(int argc, char **argv)
 
     // set CSS style
     add_styles();
-
+  
     // display_screen(settingsScreen);
     gtk_widget_show(settingsScreen);
 }

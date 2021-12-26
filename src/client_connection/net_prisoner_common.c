@@ -51,7 +51,7 @@ void _net_common_dbg(const char *format, ...)
         va_end(arg);
 
         // release the semaphore
-        sem_post(&_lock_log_dbg);
+        //sem_post(&_lock_log_dbg);
     }
 }
 
