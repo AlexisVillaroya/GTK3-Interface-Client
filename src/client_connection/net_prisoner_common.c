@@ -36,7 +36,7 @@ void _net_common_dbg(const char *format, ...)
     if (NETDEBUG)
     {
         // grab the semaphore
-        //sem_wait(&_lock_log_dbg);
+        sem_wait(&_lock_log_dbg);
 
         printf("NET: ");
 
@@ -48,7 +48,7 @@ void _net_common_dbg(const char *format, ...)
         // https://www.cplusplus.com/reference/cstdio/vfprintf/
         vfprintf(stdout, format, arg);
 
-        //va_end(arg);
+        va_end(arg);
 
         // release the semaphore
         //sem_post(&_lock_log_dbg);
@@ -65,6 +65,6 @@ void _net_common_init()
     sem_init(&_lock_log_dbg, PTHREAD_PROCESS_SHARED, 1);
     if (THREAD_SAFETY)
     {
-        _net_common_dbg("Thread safety enabled");
+        _net_common_dbg("Thread safety enabled\n");
     }
 }

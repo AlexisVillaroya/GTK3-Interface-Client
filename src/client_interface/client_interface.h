@@ -52,14 +52,12 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button);
 #pragma region display
 
 /**
- * @brief 
- * @param window 
+ * @brief hide waiting screen and display the choice screen
  */
 void display_choice_screen();
 
 /**
- * @brief 
- * @param waitingScreen 
+ * @brief hide setting screen and display the waiting screen
  */
 void display_waiting_screen();
 
@@ -68,6 +66,19 @@ void display_waiting_screen();
  * @param settingsScreen the widget
  */
 void display_screen(GtkWidget *screen);
+
+/**
+ * @brief handle round score at the end of the round
+ * @param round_score contain all informations needed
+ */
+void handle_round_score(net_common_round_score round_score);
+
+
+/**
+ * @brief handle final score at the end of the game
+ * @param final_score contain all informations needed
+ */
+void handle_final_score(net_common_final_score final_score);
 
 #pragma endregion display
 

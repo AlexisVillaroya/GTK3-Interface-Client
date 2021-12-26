@@ -3,16 +3,9 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkWindow" id="ChoiceScreen">
-    <property name="can-focus">False</property>
+    <property name="name">ChoiceScreen</property>
+    <property name="can_focus">False</property>
     <property name="resizable">False</property>
-<<<<<<< HEAD
-    <property name="default-width">600</property>
-    <property name="default-height">600</property>
-    <child>
-      <object class="GtkFixed" id="fixed">
-        <property name="width-request">420</property>
-        <property name="height-request">500</property>
-=======
     <property name="default_width">550</property>
     <property name="default_height">300</property>
     <child type="titlebar">
@@ -20,43 +13,29 @@
     </child>
     <child>
       <object class="GtkFixed" id="choiceScreen_gtkFixed">
->>>>>>> 162da995d7b75313610a5cb92aa768b70acbc0de
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <child>
           <object class="GtkButton" id="choiceScreen_gtkButton_betray">
             <property name="label" translatable="yes">Trahir</property>
-<<<<<<< HEAD
-            <property name="width-request">200</property>
-            <property name="height-request">100</property>
-=======
             <property name="width_request">200</property>
             <property name="height_request">50</property>
->>>>>>> 162da995d7b75313610a5cb92aa768b70acbc0de
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <signal name="clicked" handler="on_betrayButton_clicked" swapped="no"/>
           </object>
           <packing>
-<<<<<<< HEAD
             <property name="y">350</property>
-=======
             <property name="x">53</property>
             <property name="y">214</property>
->>>>>>> 162da995d7b75313610a5cb92aa768b70acbc0de
           </packing>
         </child>
         <child>
           <object class="GtkButton" id="choiceScreen_gtkButton_collaboration">
             <property name="label" translatable="yes">Collaborer</property>
-<<<<<<< HEAD
-            <property name="width-request">200</property>
-            <property name="height-request">100</property>
-=======
             <property name="width_request">200</property>
             <property name="height_request">50</property>
->>>>>>> 162da995d7b75313610a5cb92aa768b70acbc0de
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
@@ -68,25 +47,15 @@
           </packing>
         </child>
         <child>
-<<<<<<< HEAD
-          <object class="GtkLabel" id="label">
-            <property name="width-request">318</property>
-            <property name="height-request">63</property>
-=======
           <object class="GtkLabel" id="choiceScreen_label_title">
             <property name="width_request">300</property>
             <property name="height_request">60</property>
->>>>>>> 162da995d7b75313610a5cb92aa768b70acbc0de
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="label" translatable="yes">Dilemme du prisonnier</property>
             <attributes>
-<<<<<<< HEAD
               <attribute name="font-desc" value="Source Code Pro 10"/>
               <attribute name="style" value="normal"/>
-=======
-              <attribute name="font-desc" value="System-ui Bold 20"/>
->>>>>>> 162da995d7b75313610a5cb92aa768b70acbc0de
             </attributes>
           </object>
           <packing>
@@ -95,13 +64,6 @@
           </packing>
         </child>
         <child>
-<<<<<<< HEAD
-          <object class="GtkLabel" id="labelRound">
-            <property name="width-request">148</property>
-            <property name="height-request">63</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-=======
           <object class="GtkLabel" id="choiceScreen_label_round">
             <property name="width_request">100</property>
             <property name="height_request">80</property>
@@ -130,7 +92,6 @@
             <attributes>
               <attribute name="font-desc" value="System-ui Bold 15"/>
             </attributes>
->>>>>>> 162da995d7b75313610a5cb92aa768b70acbc0de
           </object>
           <packing>
             <property name="x">311</property>
@@ -138,156 +99,26 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="buttonFree">
-            <property name="label" translatable="yes">Libre</property>
-            <property name="width-request">109</property>
-            <property name="height-request">58</property>
+          <object class="GtkLabel">
+            <property name="name">choice_screen_textView_result</property>
+            <property name="width_request">427</property>
+            <property name="height_request">86</property>
             <property name="visible">True</property>
-            <property name="sensitive">False</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">label</property>
+            <property name="justify">center</property>
           </object>
           <packing>
-            <property name="x">22</property>
-            <property name="y">137</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="buttonFiveYears">
-            <property name="label" translatable="yes">5 ans</property>
-            <property name="width-request">109</property>
-            <property name="height-request">58</property>
-            <property name="visible">True</property>
-            <property name="sensitive">False</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-          </object>
-          <packing>
-            <property name="x">281</property>
-            <property name="y">138</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="buttonSixMonth">
-            <property name="label" translatable="yes">6 mois</property>
-            <property name="width-request">109</property>
-            <property name="height-request">58</property>
-            <property name="visible">True</property>
-            <property name="sensitive">False</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-          </object>
-          <packing>
-            <property name="x">151</property>
-            <property name="y">137</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="buttonTenYears">
-            <property name="label" translatable="yes">10 ans</property>
-            <property name="width-request">109</property>
-            <property name="height-request">58</property>
-            <property name="visible">True</property>
-            <property name="sensitive">False</property>
-            <property name="can-focus">False</property>
-            <property name="receives-default">True</property>
-          </object>
-          <packing>
-            <property name="x">413</property>
-            <property name="y">138</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkWindow" id="scoreScreen">
-    <property name="can-focus">False</property>
-    <child>
-      <object class="GtkFixed" id="scoreFixed">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <child>
-          <object class="GtkLabel" id="idLabel">
-            <property name="width-request">73</property>
-            <property name="height-request">43</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="label" translatable="yes">Vainqueur :</property>
-          </object>
-          <packing>
-            <property name="x">106</property>
-            <property name="y">41</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="idVainqueur">
-            <property name="width-request">158</property>
-            <property name="height-request">35</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-          </object>
-          <packing>
-            <property name="x">194</property>
-            <property name="y">45</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="idLabel1">
-            <property name="width-request">143</property>
-            <property name="height-request">25</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="label" translatable="yes">Score joueur 1 :</property>
-          </object>
-          <packing>
-            <property name="x">70</property>
-            <property name="y">104</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="idLabel2">
-            <property name="width-request">101</property>
-            <property name="height-request">27</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="label" translatable="yes">Score joueur 2 :</property>
-          </object>
-          <packing>
-            <property name="x">89</property>
-            <property name="y">147</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="LabelScoreJ1">
-            <property name="width-request">122</property>
-            <property name="height-request">32</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-          </object>
-          <packing>
-            <property name="x">224</property>
-            <property name="y">102</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="LabelScoreJ2">
-            <property name="width-request">100</property>
-            <property name="height-request">32</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="margin-end">50</property>
-            <property name="margin-bottom">50</property>
-          </object>
-          <packing>
-            <property name="x">236</property>
-            <property name="y">147</property>
+            <property name="x">55</property>
+            <property name="y">272</property>
           </packing>
         </child>
       </object>
     </child>
   </object>
   <object class="GtkWindow" id="settingsScreen">
-    <property name="can-focus">False</property>
+    <property name="name">settingsScreen</property>
+    <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="default-width">600</property>
     <property name="default-height">350</property>
@@ -407,9 +238,10 @@
     </child>
   </object>
   <object class="GtkWindow" id="waitingScreen">
-    <property name="width-request">420</property>
-    <property name="height-request">500</property>
-    <property name="can-focus">False</property>
+    <property name="name">waitingScreen</property>
+    <property name="width_request">420</property>
+    <property name="height_request">500</property>
+    <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="default-width">600</property>
     <property name="default-height">600</property>
