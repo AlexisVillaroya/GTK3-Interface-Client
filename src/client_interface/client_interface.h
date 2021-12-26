@@ -13,15 +13,109 @@
 #include <gtk/gtk.h>
 #include "../client_connection/net_prisoner_client.h"
 
+//--------------------------------------
+//               Events
+//--------------------------------------
+#pragma region events
+
+// ----------- choice screen -----------
+#pragma region choice_screen
+/**
+ * @brief Destroy the main window
+ */
+void on_window_main_destroy();
+
+/**
+ * @brief When the betray button is clicked ...
+ * @param button 
+ */
+void on_betrayButton_clicked(GtkButton *button);
+
+/**
+ * @brief When the collaborate button is clicked ...
+ * @param button 
+ */
+void on_collaborateButton_clicked(GtkButton *button);
+#pragma endregion choice_screen
+
+// ---------- settings screen ----------
+#pragma region settings_screen
+
+void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button);
+
+#pragma endregion settings_screen
+
+#pragma endregion events
+//--------------------------------------
+//              DISPLAY
+//--------------------------------------
+#pragma region display
+
+/**
+ * @brief hide waiting screen and display the choice screen
+ */
+void display_choice_screen();
+
+/**
+ * @brief hide setting screen and display the waiting screen
+ */
+void display_waiting_screen();
+
+/**
+ * @brief display the screen
+ * @param settingsScreen the widget
+ */
+void display_screen(GtkWidget *screen);
+
+/**
+ * @brief handle round score at the end of the round
+ * @param round_score contain all informations needed
+ */
+void handle_round_score(net_common_round_score round_score);
+
+
+/**
+ * @brief handle final score at the end of the game
+ * @param final_score contain all informations needed
+ */
+void handle_final_score(net_common_final_score final_score);
+
+#pragma endregion display
+
+//--------------------------------------
+//                 CSS
+//--------------------------------------
+#pragma region css
+
+/**
+ * @brief set a widget with css 
+ * @param cssProvider 
+ * @param g_widget 
+ */
+void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget);
+
+/**
+ * @brief add style to the interface
+ */
+void add_styles();
+
+#pragma endregion css
+
+//--------------------------------------
+//                 INIT
+//--------------------------------------
+#pragma region init
+
 /**
  * @brief initiliaze the lib needed functions 
  */
 void init_net_functions();
 
-void on_window_main_destroy();
-void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget);
-void add_styles();
-void on_betrayButton_clicked(GtkButton *button);
-void on_collaborateButton_clicked(GtkButton *button);
+/**
+ * @brief main initialisation  
+ * @param argc 
+ * @param argv 
+ */
 void init_windows(int argc, char **argv);
 
+#pragma endregion init

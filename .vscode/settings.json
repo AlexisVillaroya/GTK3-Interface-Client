@@ -1,18 +1,24 @@
 {
-  "files.associations": {
-    "string.h": "c",
-    "client_interface.h": "c",
-    "net_prisoner_common.h": "c",
-    "gtk.h": "c"
-  },
-  "C_Cpp.errorSquiggles": "Disabled",
+  "C_Cpp_Runner.cCompilerPath": "/usr/bin/gcc",
+  "C_Cpp_Runner.cppCompilerPath": "/usr/bin/g++",
+  "C_Cpp_Runner.debuggerPath": "gdb",
   "C_Cpp_Runner.warnings": [
     "-Wall",
     "-Wextra",
     "-Wpedantic"
   ],
   "C_Cpp_Runner.compilerArgs": [],
-  "C_Cpp_Runner.includePaths": [],
+  "C_Cpp_Runner.includePaths": [
+    "/home/wolo/GTK3-Interface-Client/**",
+    "/usr/include/gtk-3.0",
+    "/usr/include/glib-2.0",
+    "/usr/lib/x86_64-linux-gnu/glib-2.0/include",
+    "/usr/include/pango-1.0",
+    "/usr/include/harfbuzz",
+    "/usr/include/cairo",
+    "/usr/include/gdk-pixbuf-2.0",
+    "/usr/include/atk-1.0"
+  ],
   "C_Cpp_Runner.linkerArgs": [],
   "C_Cpp_Runner.cStandard": "",
   "C_Cpp_Runner.cppStandard": "",

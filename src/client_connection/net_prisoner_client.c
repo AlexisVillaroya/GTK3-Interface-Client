@@ -44,9 +44,16 @@ void (*_net_client_func_choice_screen)();
 /**
  * @brief the function used by the library
  * refering to the defined one by the client
- * to display the score screen
+ * to display the score screen of the round
  */
-void (*_net_client_func_score_screen)(bool, int);
+void (*_net_client_func_score_round)(net_common_round_score);
+
+/**
+ * @brief the function used by the library
+ * refering to the defined one by the client
+ * to display the final score of the game
+ */
+void (*_net_client_func_score_final)(net_common_final_score);
 
 /**
  * @brief define the function using the defined
@@ -70,12 +77,32 @@ void *net_client_set_func_choice_screen(void (*f)())
 
 /**
  * @brief define the function using the defined
+ * one by the client to display the final score
+ * @param f the client function 
+ */
+void *net_client_set_func_score_final(void (*f)())
+{
+    _net_client_func_score_final = f;
+}
+
+/**
+ * @brief define the function using the defined
+ * one by the client to display the score at the end of the round
+ * @param f the client function 
+ */
+void *net_client_set_func_score_round(void (*f)())
+{
+    _net_client_func_score_round = f;
+}
+
+/**
+ * @brief define the function using the defined
  * one by the client to display the score screen
  * @param f the client function 
  */
 void *net_client_set_func_score_screen(void (*f)())
 {
-    _net_client_func_score_screen = f;
+    _net_client_func_score_round = f;
 }
 
 /**
@@ -89,18 +116,31 @@ void _net_client_event(_net_common_netpacket packet)
     switch (packet.msg_type)
     {
     case SCREEN_WAITING:
-        _net_common_dbg("Client socket %d received SCREEN_WAITING from server\n", net_client_sockfd);
+        _net_common_dbg("Client %d received SCREEN_WAITING from server\n", net_client_id);
         (*_net_client_func_waiting_screen)();
         break;
 
     case SCREEN_CHOICE:
-        _net_common_dbg("Client socket %d received SCREEN_CHOICE from server\n", net_client_sockfd);
+        _net_common_dbg("Client %d received SCREEN_CHOICE from server\n", net_client_id);
         (*_net_client_func_choice_screen)();
         break;
 
-    case SCREEN_SCORE:
-        _net_common_dbg("Client socket %d received SCREEN_SCORE from server\n", net_client_sockfd);
-        (*_net_client_func_score_screen)(packet.has_win, packet.score);
+    case SCREEN_SCORE_ROUND:
+        _net_common_dbg("Client %d received SCREEN_SCORE_ROUND from server\n", net_client_id);
+        (*_net_client_func_score_round)(packet.round_score);
+        break;
+
+    case SCREEN_SCORE_FINAL:
+        _net_common_dbg("Client %d received SCREEN_SCORE_FINAL from server\n", net_client_id);
+        (*_net_client_func_score_final)(packet.final_score);
+        break;
+
+    case ACTION_BETRAY:
+    case ACTION_COLLAB:
+    case ACTION_QUIT:
+    case INIT_CLIENT_ID:
+    case ACTION_READY:
+        _net_common_dbg("Server error: client don't have to receive this message\n");
         break;
 
     default:
@@ -155,12 +195,16 @@ bool net_client_init(char *addrServer, int port, int client_id)
 
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
 
+    //connect(net_client_sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr));
+
+    
     //Connect the socket to the server using the address
     if (connect(net_client_sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) != 0)
     {
         _net_common_dbg("\nFail to connect to server\n");
         return false;
     };
+    
 
     // init the client id
     _net_common_netpacket packet;
@@ -168,12 +212,25 @@ bool net_client_init(char *addrServer, int port, int client_id)
     packet.client_id = client_id;
     write(net_client_sockfd, &packet, sizeof(packet));
     _net_common_dbg("the client sent his id : %d\n", net_client_id);
+    _net_common_dbg("size %d\n", sizeof(packet));
 
     // reading pthread creation
     pthread_create(&thread, 0, _net_client_threadProcess, &net_client_sockfd);
     pthread_detach(thread);
 
     return true;
+}
+
+/**
+ * @brief The client is ready for the next round
+ */
+void net_client_ready()
+{
+    _net_common_netpacket packet;
+    packet.msg_type = ACTION_READY;
+    packet.client_id = net_client_id;
+    write(net_client_sockfd, &packet, sizeof(packet));
+    _net_common_dbg("%d is ready\n", net_client_id);
 }
 
 /**
