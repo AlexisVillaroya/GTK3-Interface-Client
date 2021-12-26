@@ -124,7 +124,8 @@ enum _net_common_msg_type {
     SCREEN_SCORE_FINAL = 8,
 
     /**
-     * @brief the client as read the result and is ready for the next round
+     * @brief The client may send this to client to indicate that he (the client) is
+     * ready to make a choice
      */
     ACTION_READY = 9
 };
@@ -192,7 +193,7 @@ typedef struct {
     enum _net_common_msg_type msg_type;
 
     /**
-     * @brief network time exec
+     * @brief The delay the client took to make a choice
      */
     ulong delay;
 

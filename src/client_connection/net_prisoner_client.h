@@ -40,28 +40,28 @@ extern int net_client_sockfd;
  * refering to the defined one by the client
  * to display the waiting screen
  */
-void (*_net_client_func_waiting_screen)();
+extern void (*_net_client_func_waiting_screen)();
 
 /**
  * @brief the function used by the library
  * refering to the defined one by the client
  * to display the choice screen
  */
-void (*_net_client_func_choice_screen)();
+extern void (*_net_client_func_choice_screen)();
 
 /**
  * @brief the function used by the library
  * refering to the defined one by the client
  * to display the score screen of the round
  */
-void (*_net_client_func_score_round)(net_common_round_score);
+extern void (*_net_client_func_score_round)(net_common_round_score);
 
 /**
  * @brief the function used by the library
  * refering to the defined one by the client
  * to display the final score of the game
  */
-void (*_net_client_func_score_final)(net_common_final_score);
+extern void (*_net_client_func_score_final)(net_common_final_score);
 
 /**
  * @brief define the function using the defined
