@@ -1,4 +1,7 @@
+/doxygen/
 /output/
 /dist/
 /build/
 *.o
+/.vscode/c_cpp_properties.json
+/.vscode/settings.json
