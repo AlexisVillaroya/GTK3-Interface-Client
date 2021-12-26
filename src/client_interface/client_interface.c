@@ -48,7 +48,7 @@ GtkWidget *settingsScreen_gtkLabel_errors;
  */
 void on_window_main_destroy()
 {
-    puts("quitting");
+    puts("CLIENT : quitting");
     net_client_disconnect(10);
     gtk_main_quit();
 }
@@ -59,7 +59,7 @@ void on_window_main_destroy()
  */
 void on_betrayButton_clicked(GtkButton *button)
 {
-    puts("betray !");
+    puts("CLIENT : betray !");
     net_client_betray(10);
 }
 
@@ -69,7 +69,7 @@ void on_betrayButton_clicked(GtkButton *button)
  */
 void on_collaborateButton_clicked(GtkButton *button)
 {
-    puts("collaboration !");
+    puts("CLIENT : collaboration !");
     net_client_collab(10);
 }
 #pragma endregion choice_screen

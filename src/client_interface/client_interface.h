@@ -52,14 +52,12 @@ void on_settingsScreen_gtkButton_Valider_clicked(GtkButton *button);
 #pragma region display
 
 /**
- * @brief 
- * @param window 
+ * @brief hide waiting screen and display the choice screen
  */
 void display_choice_screen();
 
 /**
- * @brief 
- * @param waitingScreen 
+ * @brief hide setting screen and display the waiting screen
  */
 void display_waiting_screen();
 
