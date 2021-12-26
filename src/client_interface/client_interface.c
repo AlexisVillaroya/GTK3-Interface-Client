@@ -23,6 +23,7 @@ GtkWidget *choiceScreen_label_sanction;
 GtkButton *choiceScreen_gtkButton_betray;
 GtkButton *choiceScreen_gtkButton_collaboration;
 GtkWidget *choiceScreen_textView_result;
+GtkWidget *choiceScreen_spinner;
 
 // waiting screen
 GtkWidget *waitingScreen;
@@ -68,6 +69,19 @@ void on_betrayButton_clicked(GtkButton *button)
 {
     puts("CLIENT : betray !");
     net_client_betray(10);
+
+    // disable buttons
+    ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
+    g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    choiceScreen_gtkButton_betray = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_betray"));
+    choiceScreen_gtkButton_collaboration = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_collaboration"));
+    choiceScreen_textView_result = GTK_WIDGET(gtk_builder_get_object(builder, "choice_screen_textView_result"));
+    choiceScreen_spinner = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_spinner"));
+
+    gtk_widget_set_sensitive(choiceScreen_gtkButton_betray, FALSE);
+    gtk_widget_set_sensitive(choiceScreen_gtkButton_collaboration, FALSE);
+    gtk_label_set_text(choiceScreen_textView_result, "En attente de l'autre joueur ...");
+    gtk_widget_show(choiceScreen_spinner);
 }
 
 /**
@@ -78,6 +92,19 @@ void on_collaborateButton_clicked(GtkButton *button)
 {
     puts("CLIENT : collaboration !");
     net_client_collab(10);
+
+    // disable buttons
+    ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
+    g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    choiceScreen_gtkButton_betray = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_betray"));
+    choiceScreen_gtkButton_collaboration = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_collaboration"));
+    choiceScreen_textView_result = GTK_WIDGET(gtk_builder_get_object(builder, "choice_screen_textView_result"));
+    choiceScreen_spinner = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_spinner"));
+
+    gtk_widget_set_sensitive(choiceScreen_gtkButton_betray, FALSE);
+    gtk_widget_set_sensitive(choiceScreen_gtkButton_collaboration, FALSE);
+    gtk_label_set_text(choiceScreen_textView_result, "En attente de l'autre joueur ...");
+    gtk_widget_show(choiceScreen_spinner);
 }
 
 #pragma endregion choice_screen
@@ -141,9 +168,6 @@ void display_waiting_screen()
 
     g_signal_connect(waitingScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
-    gtk_widget_hide(settingsScreen);
-
-    gtk_widget_show(waitingScreen);
 }
 
 /**
@@ -151,8 +175,6 @@ void display_waiting_screen()
  */
 void display_choice_screen(net_common_round_score round_score)
 {
-    round_score.round_total = 5;
-
     gtk_builder_connect_signals(builder, NULL);
     waitingScreen = GTK_WIDGET(gtk_builder_get_object(builder, "waitingScreen"));
 
@@ -164,7 +186,6 @@ void display_choice_screen(net_common_round_score round_score)
     choiceScreen_gtkButton_collaboration = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_collaboration"));
 
     gtk_widget_hide(waitingScreen);
-
     gtk_widget_show(ChoiceScreen);
 
     // labels
@@ -173,7 +194,6 @@ void display_choice_screen(net_common_round_score round_score)
 
     gtk_label_set_text(choiceScreen_label_round, round);
     gtk_label_set_text(choiceScreen_label_sanction, "Sanction :\n0");
-
 }
 
 /**
@@ -195,6 +215,8 @@ void handle_round_score(net_common_round_score round_score)
     gtk_builder_connect_signals(builder, NULL);
     ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
     choiceScreen_textView_result = GTK_WIDGET(gtk_builder_get_object(builder, "choice_screen_textView_result"));
+    choiceScreen_spinner = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_spinner"));
+    gtk_widget_hide(choiceScreen_spinner);
 
     // creation of the result string
     char *result = malloc(sizeof(char) * 64);
@@ -224,6 +246,16 @@ void handle_round_score(net_common_round_score round_score)
     gtk_label_set_text(choiceScreen_textView_result, result);
     gtk_label_set_text(choiceScreen_label_round, round);
     gtk_label_set_text(choiceScreen_label_sanction, sanction);
+
+    
+    // enable buttons
+    ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
+    g_signal_connect(ChoiceScreen, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    choiceScreen_gtkButton_betray = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_betray"));
+    choiceScreen_gtkButton_collaboration = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_gtkButton_collaboration"));
+
+    gtk_widget_set_sensitive(choiceScreen_gtkButton_betray, TRUE);
+    gtk_widget_set_sensitive(choiceScreen_gtkButton_collaboration, TRUE);
 }
 
 /**
@@ -236,6 +268,8 @@ void handle_final_score(net_common_final_score final_score)
     gtk_builder_connect_signals(builder, NULL);
     ChoiceScreen = GTK_WIDGET(gtk_builder_get_object(builder, "ChoiceScreen"));
     choiceScreen_textView_result = GTK_WIDGET(gtk_builder_get_object(builder, "choice_screen_textView_result"));
+    choiceScreen_spinner = GTK_WIDGET(gtk_builder_get_object(builder, "choiceScreen_spinner"));
+    gtk_widget_hide(choiceScreen_spinner);
 
     // memory allocation
     int total_J1 = 0;

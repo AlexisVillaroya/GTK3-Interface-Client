@@ -27,7 +27,7 @@
           </object>
           <packing>
             <property name="x">53</property>
-            <property name="y">214</property>
+            <property name="y">158</property>
           </packing>
         </child>
         <child>
@@ -41,8 +41,8 @@
             <signal name="clicked" handler="on_collaborateButton_clicked" swapped="no"/>
           </object>
           <packing>
-            <property name="x">282</property>
-            <property name="y">212</property>
+            <property name="x">286</property>
+            <property name="y">158</property>
           </packing>
         </child>
         <child>
@@ -53,7 +53,7 @@
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Dilemme du prisonnier</property>
             <attributes>
-              <attribute name="font-desc" value="Source Code Pro 10"/>
+              <attribute name="font-desc" value="Sans Bold 20"/>
               <attribute name="style" value="normal"/>
             </attributes>
           </object>
@@ -100,15 +100,29 @@
         <child>
           <object class="GtkLabel" id="choice_screen_textView_result">
             <property name="name">choice_screen_textView_result</property>
-            <property name="width_request">427</property>
-            <property name="height_request">86</property>
+            <property name="width_request">435</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="justify">center</property>
           </object>
           <packing>
-            <property name="x">55</property>
-            <property name="y">272</property>
+            <property name="x">48</property>
+            <property name="y">224</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinner" id="choiceScreen_spinner">
+            <property name="name">choiceScreen_spinner</property>
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="active">True</property>
+          </object>
+          <packing>
+            <property name="x">397</property>
+            <property name="y">222</property>
           </packing>
         </child>
       </object>
